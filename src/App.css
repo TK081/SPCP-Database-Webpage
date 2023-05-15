@@ -43,6 +43,22 @@
   border-radius: 5px;
 }
 
+.button:hover {
+  background-color: darkgreen;
+}
+
+.button:active {
+  background-color: lightgreen;
+}
+
+.search-button:hover {
+  background-color: darkgreen;
+}
+
+.search-button:active {
+  background-color: lightgreen;
+}
+
 .logo {
   position: absolute;
   top: 0;
