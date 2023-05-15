@@ -13,6 +13,15 @@ function App() {
     // Handle search logic here
   };
 
+  const [showPopup, setShowPopup] = useState(false);
+  
+  const handleHelp = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 5000); // Hide the popup after 2 seconds
+  };
+
   return (
     <div className="container">
       <h1>Portraits of Ontario</h1>
@@ -27,8 +36,10 @@ function App() {
         placeholder="Search..."
       />
       <button className="search-button" onClick={handleSearch}>Search</button>
-      <button className="button">Help</button>
+      <button className="button" onClick={handleHelp}>Help</button>
+      {showPopup && <div className="popup">Search in this format: " "</div>}
       <button className="button">Download</button>
+      
     </div>
   );
 }
