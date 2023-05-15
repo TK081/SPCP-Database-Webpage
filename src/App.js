@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import './App.css';
 import image from './images/spcp.jpg';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 function App() {
 
