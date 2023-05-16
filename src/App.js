@@ -42,7 +42,7 @@ function App() {
       </div>
 
       <button className="button" onClick={handleHelp}>Help</button>
-      {showPopup && <div className="popup">Search in this format: " "</div>}
+      {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}
       <button className="button">Download</button>
       
 
