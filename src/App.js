@@ -23,13 +23,15 @@ function App() {
   };
 
   return (
-    <div className="container">
+    <div className = "container">
       <h1>Tiseagan and Ronak</h1>
       <h1>Portraits of Ontario</h1>
       <img className="logo" src={image} alt="SPCP Logo" />
       <p>Basic information about the webpage</p>
       <h2>Header about search bar</h2>
       <p>Placeholder information about webpage, database, and organization </p>
+      
+      <div class = "functionButtons">
       <input className="search-bar"
         type="text"
         value={searchTerm}
@@ -37,9 +39,12 @@ function App() {
         placeholder="Search..."
       />
       <button className="search-button" onClick={handleSearch}>Search</button>
+      </div>
+
       <button className="button" onClick={handleHelp}>Help</button>
       {showPopup && <div className="popup">Search in this format: " "</div>}
       <button className="button">Download</button>
+      
 
     </div>
   );

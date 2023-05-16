@@ -6,6 +6,10 @@
   height: 100vh;
 }
 
+.functionButtons{
+ align-items: center;
+}
+
 .search-bar {
   width: 550px;
   padding: 10px;
@@ -28,6 +32,8 @@
   cursor: pointer;
   border-radius: 5px;
 }
+
+
 
 .button {
   background-color: #4CAF50;
