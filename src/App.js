@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import './App.css';
 import image from './images/spcp.jpg';
+import { FaQuestion } from 'react-icons/fa';
+
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,6 +22,7 @@ function App() {
     setTimeout(() => {
       setShowPopup(false);
     }, 5000); // Hide the popup after 2 seconds
+
   };
 
   return (
@@ -38,10 +41,11 @@ function App() {
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search..."
       />
+
       <button className="search-button" onClick={handleSearch}>Search</button>
       </div>
 
-      <button className="button" onClick={handleHelp}>Help</button>
+      <button className="button" onClick={handleHelp}><FaQuestion/></button>
       {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}
       <button className="button">Download</button>
       
