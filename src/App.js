@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './App.css';
 import image from './images/spcp.jpg';
 import { FaQuestion } from 'react-icons/fa';
+import XLSX from 'xlsx';
 import excelFile1 from './excelfiles/Dummy_Data_1.xlsx';
 import excelFile2 from './excelfiles/Dummy_Data_2.xlsx';
 import excelFile3 from './excelfiles/Dummy_Data_3.xlsx';
