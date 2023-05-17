@@ -1,13 +1,16 @@
 .container {
+  background: beige ;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100vh;
 }
 
 .functionButtons{
  align-items: center;
+ justify-content: flex-start;
+ background: beige ;
 }
 
 .search-bar {
