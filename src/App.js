@@ -25,12 +25,16 @@ function App() {
 
   };
 
+  // Inside the component
+  const [selectedFile, setSelectedFile] = useState("");
+
   return (
     <div className = "container">
-      <h1>Tiseagan and Ronak</h1>
       <h1>Portraits of Ontario</h1>
+      <p>Basic information about the webpage</p>  
+      <h2>Drop down Menu</h2>
+      <p>Drop down menu paragraph</p>
       <img className="logo" src={image} alt="SPCP Logo" />
-      <p>Basic information about the webpage</p>
       <h2>Header about search bar</h2>
       <p>Placeholder information about webpage, database, and organization </p>
       
