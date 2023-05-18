@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Brooklyn+Two&display=swap');
+
+
 .container {
   background: beige ;
   display: flex;
@@ -5,12 +8,23 @@
   align-items: center;
   justify-content: flex-start;
   height: 100vh;
+  font-family: Brooklyn Two, sans-serif;
+  color: #474834;
 }
 
 .functionButtons{
+ font-family: Brooklyn Two, sans-serif;
  align-items: center;
  justify-content: flex-start;
  background: beige ;
+}
+
+.paragraph{
+  font-family: Brooklyn Two, sans-serif;
+  text-align: center;
+  line-height: 1.0;
+  background: beige ;
+  color: #474834;
 }
 
 .search-bar {
@@ -23,7 +37,7 @@
 }
 
 .search-button {
-  background-color: #4CAF50;
+  background-color: #00C9B0;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -34,12 +48,13 @@
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
+  font-family: Brooklyn Two, sans-serif;
 }
 
 
 
 .button {
-  background-color: #4CAF50;
+  background-color: #00C9B0;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -50,22 +65,23 @@
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
+  font-family: Brooklyn Two, sans-serif;
 }
 
 .button:hover {
-  background-color: darkgreen;
+  background-color: #007663;
 }
 
 .button:active {
-  background-color: lightgreen;
+  background-color: #6af0e0;
 }
 
 .search-button:hover {
-  background-color: darkgreen;
+  background-color: #007663;
 }
 
 .search-button:active {
-  background-color: lightgreen;
+  background-color: #6af0e0;;
 }
 
 .logo {

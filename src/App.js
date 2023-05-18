@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import './App.css';
 import image from './images/spcp.jpg';
-import { FaQuestion } from 'react-icons/fa';
+import { FaQuestion , FaDownload} from 'react-icons/fa';
 import excelFile1 from './excelfiles/Dummy_Data_1.xlsx';
 import excelFile2 from './excelfiles/Dummy_Data_2.xlsx';
 import excelFile3 from './excelfiles/Dummy_Data_3.xlsx';
 import SearchBar from "./SearchBar";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 function App() {
 
@@ -43,11 +44,15 @@ function App() {
   };
 
   return (
+
     <div className = "container">
       <h1>Portraits of Peel Database Webpage</h1>
-      <p>Are you looking for information about South Asians within Peel, provincially, or nationally? 
-        Look no further! Portraits of Peel has been collecting data since 1965 and helping curious minds like yours use our data analysis to your advantage! 
-        Click the drop-down menu and get the information you need :)</p>  
+      <div className = "paragraph">
+      <p>Are you looking for information about South Asians within Peel, provincially, or nationally? </p>  
+      <p>Look no further! Portraits of Peel has been collecting data since 1965 and helping curious </p> 
+      <p>minds like yours use our data analysis to your advantage! Click the drop-down menu and </p>
+      <p>get the information you need :)</p>
+      </div>
       <h2>Dropdown Menu</h2>
       <p>This dropdown menu will allow you to cycle through three different profiles, which all contain unique data for specific areas.</p>
       <div>
@@ -68,7 +73,7 @@ function App() {
 
       <button className="button" onClick={handleHelp}><FaQuestion/></button>
       {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}
-      <button className="button">Download</button>
+      <button className="button"><FaDownload/></button>
       
     </div>
   );
