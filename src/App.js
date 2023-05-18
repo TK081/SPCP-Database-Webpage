@@ -42,8 +42,6 @@ function App() {
     setSelectedFile(e.target.value);
   };
 
-
-
   return (
     <div className = "container">
       <h1>Portraits of Peel Database Webpage</h1>
