@@ -13,7 +13,12 @@ function App() {
   // Code for search bar logic
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [showTable, setShowTable] = useState(false); // intail states for showing the table
+
   const handleSearch = () => {
+
+    setShowTable(true)
+    
     // Handle search logic here
   };
 
@@ -39,6 +44,8 @@ function App() {
   const handleFileChange = (e) => {
     setSelectedFile(e.target.value);
   };
+
+
 
   return (
     <div className = "container">
@@ -74,6 +81,27 @@ function App() {
       <button className="button" onClick={handleHelp}><FaQuestion/></button>
       {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}
       <button className="button">Download</button>
+
+      {showTable && (<table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Ronak</td>
+          <td>20</td>
+        </tr>
+        <tr>
+          <td>Bob</td>
+          <td>35</td>
+        </tr>
+
+        </tbody>
+
+      </table>)}
       
     </div>
   );
