@@ -95,27 +95,6 @@ function App() {
       <button className="button" onClick={handleHelp}><FaQuestion/></button>
       {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}
       <button className="button">Download</button>
-
-      {showTable && (<table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Age</th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>Ronak</td>
-          <td>20</td>
-        </tr>
-        <tr>
-          <td>Bob</td>
-          <td>35</td>
-        </tr>
-
-        </tbody>
-
-      </table>)}
       
     </div>
   );
