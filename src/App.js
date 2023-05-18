@@ -46,10 +46,12 @@ function App() {
 
   return (
     <div className = "container">
-      <h1>Portraits of Ontario</h1>
-      <p>Basic information about the webpage</p>  
-      <h2>Drop down Menu</h2>
-      <p>Drop down menu paragraph</p>
+      <h1>Portraits of Peel Database Webpage</h1>
+      <p>Are you looking for information about South Asians within Peel, provincially, or nationally? 
+        Look no further! Portraits of Peel has been collecting data since 1965 and helping curious minds like yours use our data analysis to your advantage! 
+        Click the drop-down menu and get the information you need :)</p>  
+      <h2>Dropdown Menu</h2>
+      <p>This dropdown menu will allow you to cycle through three different profiles, which all contain unique data for specific areas.</p>
       <div>
       <select value={selectedFile} onChange={(e) => setSelectedFile(e.target.value)}>
       <option value="">Select Excel File</option>
@@ -61,8 +63,8 @@ function App() {
     </select>
       </div>
       <img className="logo" src={image} alt="SPCP Logo" />
-      <h2>Header about search bar</h2>
-      <p>Placeholder information about webpage, database, and organization </p>
+      <h2>Searchbar for database and search queries </h2>
+      <p>This search bar allows for the user to input unique searches, which will allow for the needed table of data to be outputted.  </p>
       
       <SearchBar/>
 
