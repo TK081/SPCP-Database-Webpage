@@ -5,6 +5,7 @@ import { FaQuestion } from 'react-icons/fa';
 import excelFile1 from './excelfiles/Dummy_Data_1.xlsx';
 import excelFile2 from './excelfiles/Dummy_Data_2.xlsx';
 import excelFile3 from './excelfiles/Dummy_Data_3.xlsx';
+import SearchBar from "./SearchBar";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -63,16 +64,7 @@ function App() {
       <h2>Header about search bar</h2>
       <p>Placeholder information about webpage, database, and organization </p>
       
-      <div class = "functionButtons">
-      <input className="search-bar"
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search..."
-      />
-
-      <button className="search-button" onClick={handleSearch}>Search</button>
-      </div>
+      <SearchBar/>
 
       <button className="button" onClick={handleHelp}><FaQuestion/></button>
       {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}
