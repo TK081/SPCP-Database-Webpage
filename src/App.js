@@ -14,12 +14,12 @@ import 'typeface-montserrat';
 function App() {
 
   // Code for search bar logic
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearch = () => {
+  // const handleSearch = () => {
 
-    // Handle search logic here
-  };
+  //   // Handle search logic here
+  // };
 
   // Code for help button pop up message
   const [showPopup, setShowPopup] = useState(false);
