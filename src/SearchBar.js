@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import {readFile} from 'xlsx';
+import {readFile, utils} from 'xlsx';
 
 const SearchBar = () => { 
 
@@ -14,11 +14,14 @@ const SearchBar = () => {
     const handleSearchClick = () => {
         localStorage.setItem('searchQuery', searchQuery);
         const workbook = readFile('excelfiles/Cleaned_Up_Data.xlsx');
-        const worksheet = workbook.Sheets['demograpic-Peel Canada Ontario'];
-        const cell = worksheet['A1'];
-        const cellValue = cell.v;
-        console.log('Cell Value:', cellValue);
-        setSearchResults(cellValue);
+        const sheetName = workbook.SheetNames[0]; // Assuming the first sheet is the one you want to search
+        const worksheet = workbook.Sheets[sheetName];
+        const data = utils.sheet_to_json(worksheet);
+        const matchingRows = data.filter((row) => {
+        // Customize the logic to match the search query against the desired cell value(s)
+        // For example, if you want to match the search query against a specific column:
+            return row.columnName === searchQuery;
+        });
     };
 
     return ( 
