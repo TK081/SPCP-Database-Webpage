@@ -7,6 +7,7 @@ import excelFile2 from './excelfiles/Dummy_Data_2.xlsx';
 import excelFile3 from './excelfiles/Dummy_Data_3.xlsx';
 import SearchBar from "./SearchBar";
 import 'typeface-montserrat';
+import {readFile, utils} from 'xlsx';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,6 +15,11 @@ function App() {
 
   // Code for help button pop up message
   const [showPopup, setShowPopup] = useState(false);
+
+  // const workbook = readFile('excelfiles/Dummy_Data_1.xlsx');
+  // const worksheet = workbook.Sheets[0];
+  // const data = utils.sheet_to_json(worksheet);
+  // console.log(data);
   
   const handleHelp = () => {
     setShowPopup(true);
@@ -26,7 +32,7 @@ function App() {
   const [selectedFile, setSelectedFile] = useState("");
 
   const options = [
-    { value: "Dummy_Data_1.xlsx", label: "Profile 1" },
+    { value: "Cleaned_Up_Data.xlsx", label: "Profile 1" },
     { value: "Dummy_Data_2.xlsx", label: "Profile 2" },
     { value: "Dummy_Data_3.xlsx", label: "Profile 3" }
   ];
@@ -66,6 +72,7 @@ function App() {
       <button className="button" onClick={handleHelp}><FaQuestion/></button>
       {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}
       <button className="button"><FaDownload/></button>
+  
       
     </div>
   );

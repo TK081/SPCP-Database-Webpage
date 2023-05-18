@@ -6,6 +6,7 @@ const SearchBar = () => {
 
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState('');
+    const [matchingRows, setMatchingRows] = useState([]);
 
     const handleSearchQuery = (event) => {
         setSearchQuery(event.target.value);
@@ -13,15 +14,17 @@ const SearchBar = () => {
 
     const handleSearchClick = () => {
         localStorage.setItem('searchQuery', searchQuery);
-        const workbook = readFile('excelfiles/Cleaned_Up_Data.xlsx');
-        const sheetName = workbook.SheetNames[0]; // Assuming the first sheet is the one you want to search
-        const worksheet = workbook.Sheets[sheetName];
-        const data = utils.sheet_to_json(worksheet);
-        const matchingRows = data.filter((row) => {
+        // const workbook = readFile('excelfiles/Cleaned_Up_Data.xlsx');
+        // const sheetName = workbook.SheetNames[0]; // Assuming the first sheet is the one you want to search
+        // const worksheet = workbook.Sheets[sheetName];
+        // const data = utils.sheet_to_json(worksheet);
+        // console.log(data);
+        //const filteredRows = data.filter((row) => {
         // Customize the logic to match the search query against the desired cell value(s)
         // For example, if you want to match the search query against a specific column:
-            return row.columnName === searchQuery;
-        });
+        //    return row.columnName === searchQuery;
+        //});
+        //setMatchingRows(filteredRows);
     };
 
     return ( 
@@ -36,6 +39,15 @@ const SearchBar = () => {
             <div>
                 {searchResults}
             </div>
+
+            <div>
+    {matchingRows.map((row) => (
+      <p key={row.id}>{row.columnName}</p>
+      // Render other relevant data from the matching row
+    ))}
+  </div>
+
+            
         </div>
     ); 
 }; 
