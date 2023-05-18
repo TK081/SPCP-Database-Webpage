@@ -6,6 +6,7 @@ import excelFile1 from './excelfiles/Dummy_Data_1.xlsx';
 import excelFile2 from './excelfiles/Dummy_Data_2.xlsx';
 import excelFile3 from './excelfiles/Dummy_Data_3.xlsx';
 import SearchBar from "./SearchBar";
+import 'typeface-montserrat';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
