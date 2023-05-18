@@ -2,38 +2,21 @@ import React, { useState } from "react";
 import './App.css';
 import image from './images/spcp.jpg';
 import { FaQuestion } from 'react-icons/fa';
-import SearchBar from "./SearchBar";
-import { read, utils } from 'xlsx';
 import excelFile1 from './excelfiles/Dummy_Data_1.xlsx';
 import excelFile2 from './excelfiles/Dummy_Data_2.xlsx';
 import excelFile3 from './excelfiles/Dummy_Data_3.xlsx';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
-function FileUploader() {
-  const [selectedFile, setSelectedFile] = useState(null);
-
-}
-
 function App() {
 
   // Code for search bar logic
-  // const [searchTerm, setSearchTerm] = useState("");
-
-<<<<<<< HEAD
-  const [showTable, setShowTable] = useState(false); // intail states for showing the table
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = () => {
 
-    setShowTable(true)
-    
     // Handle search logic here
   };
-=======
-  // const handleSearch = () => {
-  //   // Handle search logic here
-  // };
->>>>>>> 5563d6a9e8cf361a9d929e73fa1537fde93e65a6
 
   // Code for help button pop up message
   const [showPopup, setShowPopup] = useState(false);
@@ -81,41 +64,19 @@ function App() {
       <p>Placeholder information about webpage, database, and organization </p>
       
       <div class = "functionButtons">
-      {/* <input className="search-bar"
+      <input className="search-bar"
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search..."
       />
 
-      <button className="search-button" onClick={handleSearch}>Search</button> */}
-      <SearchBar className = "search-bar"/>
+      <button className="search-button" onClick={handleSearch}>Search</button>
       </div>
 
       <button className="button" onClick={handleHelp}><FaQuestion/></button>
       {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}
       <button className="button">Download</button>
-
-      {showTable && (<table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Age</th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>Ronak</td>
-          <td>20</td>
-        </tr>
-        <tr>
-          <td>Bob</td>
-          <td>35</td>
-        </tr>
-
-        </tbody>
-
-      </table>)}
       
     </div>
   );
