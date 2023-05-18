@@ -1,0 +1,27 @@
+import React, { useState } from 'react';
+
+const SearchBar = () => { 
+
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleInputChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const handleSearchClick = () => {
+        localStorage.setItem('searchQuery', searchQuery);
+    }
+
+    return ( 
+        <div> 
+            <input
+                type="text"
+                value={searchQuery}
+                onChange={handleInputChange}
+            />
+            <button onClick={handleSearchClick}>Search</button>
+        </div>
+    ); 
+}; 
+
+export default SearchBar;
