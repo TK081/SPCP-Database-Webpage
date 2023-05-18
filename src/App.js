@@ -20,7 +20,6 @@ function App() {
   // Code for search bar logic
   // const [searchTerm, setSearchTerm] = useState("");
 
-<<<<<<< HEAD
   const [showTable, setShowTable] = useState(false); // intail states for showing the table
 
   const handleSearch = () => {
@@ -29,11 +28,6 @@ function App() {
     
     // Handle search logic here
   };
-=======
-  // const handleSearch = () => {
-  //   // Handle search logic here
-  // };
->>>>>>> 5563d6a9e8cf361a9d929e73fa1537fde93e65a6
 
   // Code for help button pop up message
   const [showPopup, setShowPopup] = useState(false);
