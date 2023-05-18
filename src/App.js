@@ -10,16 +10,7 @@ import 'typeface-montserrat';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
-
 function App() {
-
-  // Code for search bar logic
-  // const [searchTerm, setSearchTerm] = useState("");
-
-  // const handleSearch = () => {
-
-  //   // Handle search logic here
-  // };
 
   // Code for help button pop up message
   const [showPopup, setShowPopup] = useState(false);
