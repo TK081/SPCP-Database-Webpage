@@ -51,8 +51,12 @@ function App() {
       <p>minds like yours use our data analysis to your advantage! Click the drop-down menu and </p>
       <p>get the information you need :)</p>
       </div>
+
+      <div className="paragraphtwo">
       <h2>Dropdown Menu</h2>
-      <p>This dropdown menu will allow you to cycle through three different profiles, which all contain unique data for specific areas.</p>
+      <p>This dropdown menu will allow you to cycle through three different profiles, which</p>
+      <p>all contain unique data for specific areas.</p>
+      </div>
       <div>
       <select value={selectedFile} onChange={(e) => setSelectedFile(e.target.value)}>
       <option value="">Select Excel File</option>
@@ -64,14 +68,20 @@ function App() {
     </select>
       </div>
       <img className="logo" src={image} alt="SPCP Logo" />
+      <div className="paragraphthree">
+       <div></div>
       <h2>Searchbar for database and search queries </h2>
-      <p>This search bar allows for the user to input unique searches, which will allow for the needed table of data to be outputted.  </p>
-      
+      <p>This search bar allows for the user to input unique searches, which will allow</p>
+      <p> for the needed table of data to be outputted.</p>
+      </div>
       <SearchBar/>
+      <div>
 
       <button className="button" onClick={handleHelp}><FaQuestion/></button>
       {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}
       <button className="button"><FaDownload/></button>
+
+      </div>
   
       
     </div>

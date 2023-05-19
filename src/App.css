@@ -9,7 +9,7 @@
   color: #474834;
 }
 
-.functionButtons{
+.search{
  font-family: 'Montserrat', sans-serif;
  align-items: center;
  justify-content: flex-start;
@@ -24,18 +24,44 @@
   color: #474834;
 }
 
-.search-bar {
-  width: 550px;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+.paragraphtwo{
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  line-height: 1.0;
+  background: beige ;
+  color: #474834;
+
 }
 
+.paragraphthree{
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  line-height: 1.0;
+  background: beige ;
+  color: #474834;
+
+}
+
+.search-bar {
+  width:  550px;
+  height: 35px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 60px;
+  border: 3px solid #474834;
+  background: transparent;
+  backdrop-filter: blur(500px);
+  font-size: 20px;
+  color: #474834;;
+}
+
+
 .search-button {
-  background-color: #00C9B0;
-  border: none;
+  background: #00C9B0;
+  border: 0;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
   color: white;
   padding: 10px 20px;
   text-align: center;
@@ -44,7 +70,6 @@
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 5px;
   font-family: 'Montserrat', sans-serif;
 }
 

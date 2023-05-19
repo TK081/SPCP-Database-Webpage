@@ -28,7 +28,7 @@ const SearchBar = () => {
     };
 
     return ( 
-        <div class = "functionButtons"> 
+        <div class = "search"> 
             <input className="search-bar"
                 type="text"
                 value={searchQuery}
