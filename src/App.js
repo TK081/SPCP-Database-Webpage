@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import './App.css';
 import image from './images/spcp.jpg';
 import { FaQuestion , FaDownload} from 'react-icons/fa';
-import excelFile1 from './excelfiles/Dummy_Data_1.xlsx';
-import excelFile2 from './excelfiles/Dummy_Data_2.xlsx';
-import excelFile3 from './excelfiles/Dummy_Data_3.xlsx';
+import excelFile1 from './excelfiles/Cleaned_Up_Data.xlsx';
+import excelFile2 from './excelfiles/South_Asian_Cleaned_Up_Data_-_Provinces.xlsx';
+import excelFile3 from './excelfiles/Dummy_Data_1.xlsx';
 import SearchBar from "./SearchBar";
 import 'typeface-montserrat';
 import {readFile, utils} from 'xlsx';
@@ -32,9 +32,9 @@ function App() {
   const [selectedFile, setSelectedFile] = useState("");
 
   const options = [
-    { value: "Cleaned_Up_Data.xlsx", label: "Profile 1" },
-    { value: "Dummy_Data_2.xlsx", label: "Profile 2" },
-    { value: "Dummy_Data_3.xlsx", label: "Profile 3" }
+    { value: excelFile1, label: "Profile 1" },
+    { value: excelFile2, label: "Profile 2" },
+    { value: excelFile3, label: "Profile 3" }
   ];
 
   const handleFileChange = (e) => {
