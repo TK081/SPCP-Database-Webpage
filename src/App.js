@@ -37,19 +37,45 @@ function App() {
     { value: excelFile3, label: "Profile 3" }
   ];
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.value);
-    const file = event.target.value;
+  const handleFileChange = (selectedOption) => {
+    const fileMap = {
+      option1: '/excelfiles/Cleaned_Up_Data.xlsx',
+      option2: '/excelfiles/South_Asian_Cleaned_Up_Data_-_Provinces.xlsx',
+      option3: '/excelfiles/First_Native_Languages_Spoken.png',
+      // Add more file paths as needed
+  };
+  
+  const filePath = fileMap[selectedOption];
 
-    // Check if the file is an Excel file (optional)
-    if (file.type === "application/vnd.ms-excel" || file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
-    // File is an Excel file, you can proceed with further checks or operations
-      console.log("Excel file selected:", file.name);
-    } else {
-    // File is not an Excel file, you can show an error message or perform other actions
-      console.log("Invalid file format. Please select an Excel file.");
-    }
+  if (!filePath) {
+    console.log("Invalid option selected.");
+    return;
+  }
+
+  fetch(filePath)
+    .then((response) => response.blob())
+    .then((blob) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const fileContent = reader.result;
+        // Display the file content in the console
+        console.log(fileContent);
+      };
+
+      reader.readAsBinaryString(blob);
+    })
+    .catch((error) => {
+      console.log("Error reading file:", error);
+    });
       
+  };
+
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+    handleFileChange(event.target.value);
   };
 
   return (
@@ -77,6 +103,17 @@ function App() {
         </option>
       ))}
     </select>
+
+
+    <div>
+      <select value={selectedOption} onChange={handleOptionChange}>
+        <option value="">Select an option</option>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
+    </div>
+
       </div>
       <img className="logo" src={image} alt="SPCP Logo" />
       <div className="paragraphthree">
@@ -93,7 +130,7 @@ function App() {
 
       </div>
   
-      
+     
     </div>
   );
 }
