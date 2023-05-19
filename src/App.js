@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './App.css';
 import image from './images/spcp.jpg';
-import { FaQuestion , FaDownload} from 'react-icons/fa';
+import {FaQuestion , FaDownload} from 'react-icons/fa';
 import excelFile1 from './excelfiles/Cleaned_Up_Data.xlsx';
 import excelFile2 from './excelfiles/South_Asian_Cleaned_Up_Data_-_Provinces.xlsx';
 import excelFile3 from './excelfiles/Dummy_Data_1.xlsx';
