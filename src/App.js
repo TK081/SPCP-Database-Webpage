@@ -4,7 +4,7 @@ import image from './images/spcp.jpg';
 import {FaQuestion , FaDownload} from 'react-icons/fa';
 import excelFile1 from './excelfiles/Cleaned_Up_Data.xlsx';
 import excelFile2 from './excelfiles/South_Asian_Cleaned_Up_Data_-_Provinces.xlsx';
-import excelFile3 from './excelfiles/Dummy_Data_1.xlsx';
+import excelFile3 from './excelfiles/First_Native_Languages_Spoken.png';
 import SearchBar from "./SearchBar";
 import 'typeface-montserrat';
 import {readFile, utils} from 'xlsx';
@@ -37,8 +37,19 @@ function App() {
     { value: excelFile3, label: "Profile 3" }
   ];
 
-  const handleFileChange = (e) => {
-    setSelectedFile(e.target.value);
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.value);
+    const file = event.target.value;
+
+    // Check if the file is an Excel file (optional)
+    if (file.type === "application/vnd.ms-excel" || file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+    // File is an Excel file, you can proceed with further checks or operations
+      console.log("Excel file selected:", file.name);
+    } else {
+    // File is not an Excel file, you can show an error message or perform other actions
+      console.log("Invalid file format. Please select an Excel file.");
+    }
+      
   };
 
   return (
@@ -58,7 +69,7 @@ function App() {
       <p>all contain unique data for specific areas.</p>
       </div>
       <div>
-      <select value={selectedFile} onChange={(e) => setSelectedFile(e.target.value)}>
+      <select value={selectedFile} onChange={(event) => setSelectedFile(event.target.value)}>
       <option value="">Select Excel File</option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
