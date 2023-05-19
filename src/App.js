@@ -69,7 +69,6 @@ function App() {
       </div>
       <img className="logo" src={image} alt="SPCP Logo" />
       <div className="paragraphthree">
-       <div></div>
       <h2>Searchbar for database and search queries </h2>
       <p>This search bar allows for the user to input unique searches, which will allow</p>
       <p> for the needed table of data to be outputted.</p>
