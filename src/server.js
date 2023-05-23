@@ -1,5 +1,5 @@
-const XLSX = require('xlsx');
-const express = require('express');
+import XLSX from 'xlsx';
+import express from 'express';
 const app = express();
 const port = 5000;
 
