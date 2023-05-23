@@ -43,6 +43,39 @@
 
 }
 
+
+.dropdown{
+  background: beige ;
+  color: #474834;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px #474834 solid;
+  border-radius: 0.5em;
+  padding: 1em;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dropdown:box{
+  
+  background: beige ;
+  color: #474834;
+
+}
+
+.dropdown:click{
+border: 2px #474834 solid;
+box-shadow:0 0 0.8em #474834;  
+}
+
+.dropdown:hover{
+background: rgb(204, 204, 184) ;
+
+}
+
+
 .search-bar {
   width:  550px;
   height: 35px;

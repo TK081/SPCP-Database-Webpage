@@ -4,19 +4,17 @@ import image from './images/spcp.jpg';
 import {FaQuestion , FaDownload} from 'react-icons/fa';
 import excelFile1 from './excelfiles/Cleaned_Up_Data.xlsx';
 import excelFile2 from './excelfiles/South_Asian_Cleaned_Up_Data_-_Provinces.xlsx';
-import excelFile3 from './excelfiles/First_Native_Languages_Spoken.png';
 import SearchBar from "./SearchBar";
 import 'typeface-montserrat';
-import {readFile, utils} from 'xlsx';
+import XLSX from 'xlsx';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
 
-  const XLSX = require('xlsx')
-
   // Code for help button pop up message
-  const [showPopup, setShowPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState('');
+
   
   const handleHelp = () => {
     setShowPopup(true);
@@ -26,12 +24,11 @@ function App() {
   };
 
   // Code for drop down menu for excel files
-  const [selectedFile, setSelectedFile] = useState("");
+  const [selectedSheet, setSelectedSheet] = useState("");
 
   const options = [
-    { value: 'Dummy_Data_1.xlsx', label: "Profile 1" },
-    { value: excelFile2, label: "Profile 2" },
-    { value: excelFile3, label: "Profile 3" }
+    { value: 'Peel Region Statistics', label: "Profile 1" },
+    { value: 'Canada Statistics', label: "Profile 2" }
   ];
 
   return (
@@ -50,8 +47,8 @@ function App() {
       <p>This dropdown menu will allow you to cycle through three different profiles, which</p>
       <p>all contain unique data for specific areas.</p>
       </div>
-      <div>
-      <select value={selectedFile} onChange={(event) => setSelectedFile(event.target.value)}>
+      <div >
+      <select className="dropdown" value={selectedSheet} onChange={(event) => setSelectedSheet(event.target.value)}>
       <option value="">Select Excel File</option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
