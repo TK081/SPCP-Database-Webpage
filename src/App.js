@@ -13,13 +13,10 @@ import {readFile, utils} from 'xlsx';
 
 function App() {
 
+  const XLSX = require('xlsx')
+
   // Code for help button pop up message
   const [showPopup, setShowPopup] = useState(false);
-
-  // const workbook = readFile('excelfiles/Dummy_Data_1.xlsx');
-  // const worksheet = workbook.Sheets[0];
-  // const data = utils.sheet_to_json(worksheet);
-  // console.log(data);
   
   const handleHelp = () => {
     setShowPopup(true);
@@ -32,51 +29,10 @@ function App() {
   const [selectedFile, setSelectedFile] = useState("");
 
   const options = [
-    { value: excelFile1, label: "Profile 1" },
+    { value: 'Dummy_Data_1.xlsx', label: "Profile 1" },
     { value: excelFile2, label: "Profile 2" },
     { value: excelFile3, label: "Profile 3" }
   ];
-
-  const handleFileChange = (selectedOption) => {
-    const fileMap = {
-      option1: '/excelfiles/Cleaned_Up_Data.xlsx',
-      option2: '/excelfiles/South_Asian_Cleaned_Up_Data_-_Provinces.xlsx',
-      option3: '/excelfiles/First_Native_Languages_Spoken.png',
-      // Add more file paths as needed
-  };
-  
-  const filePath = fileMap[selectedOption];
-
-  if (!filePath) {
-    console.log("Invalid option selected.");
-    return;
-  }
-
-  fetch(filePath)
-    .then((response) => response.blob())
-    .then((blob) => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        const fileContent = reader.result;
-        // Display the file content in the console
-        console.log(fileContent);
-      };
-
-      reader.readAsBinaryString(blob);
-    })
-    .catch((error) => {
-      console.log("Error reading file:", error);
-    });
-      
-  };
-
-  const [selectedOption, setSelectedOption] = useState('');
-
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-    handleFileChange(event.target.value);
-  };
 
   return (
 
@@ -104,15 +60,6 @@ function App() {
       ))}
     </select>
 
-
-    <div>
-      <select value={selectedOption} onChange={handleOptionChange}>
-        <option value="">Select an option</option>
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
-      </select>
-    </div>
 
       </div>
       <img className="logo" src={image} alt="SPCP Logo" />
