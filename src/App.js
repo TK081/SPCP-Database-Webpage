@@ -5,6 +5,8 @@ import {FaQuestion , FaDownload} from 'react-icons/fa';
 import SearchBar from "./SearchBar";
 import 'typeface-montserrat';
 
+// Hi
+
 function App() {
 
   // Code for help button pop up message
