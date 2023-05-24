@@ -27,10 +27,7 @@ const SearchBar = () => {
             <div>
                 {searchResults}
             </div>
-
-            <div>
-  </div>
-        </div>
+        </div>  
     ); 
 }; 
 
