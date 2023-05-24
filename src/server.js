@@ -7,9 +7,9 @@ const port = 5000;
 // Code to read in excel data file using XLSX & SheetJS
 const path = require('path');
 const XLSX = require('xlsx');
-const filePath = path.join(__dirname, 'excelfiles', '2016_Statistics_Without_Formatting.xlsx');
+const filePath = path.join(__dirname, 'excelfiles', 'testpractice.xlsx');
 const workbook = XLSX.readFile(filePath);
-const sheetnames = workbook.SheetNames[0];
+const sheetnames = workbook.SheetNames[2];
 const worksheet = workbook.Sheets[sheetnames];
 // const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
 const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
