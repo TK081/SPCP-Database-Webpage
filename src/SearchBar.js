@@ -41,13 +41,11 @@ const SearchBar = () => {
             </div>
 
             <div>
-    {matchingRows.map((row) => (
+    {/* {matchingRows.map((row) => (
       <p key={row.id}>{row.columnName}</p>
       // Render other relevant data from the matching row
-    ))}
+    ))} */}
   </div>
-
-            
         </div>
     ); 
 }; 

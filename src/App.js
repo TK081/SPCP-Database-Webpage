@@ -6,7 +6,6 @@ import excelFile1 from './excelfiles/Cleaned_Up_Data.xlsx';
 import excelFile2 from './excelfiles/South_Asian_Cleaned_Up_Data_-_Provinces.xlsx';
 import SearchBar from "./SearchBar";
 import 'typeface-montserrat';
-import XLSX from 'xlsx';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,7 +14,6 @@ function App() {
   // Code for help button pop up message
   const [showPopup, setShowPopup] = useState('');
 
-  
   const handleHelp = () => {
     setShowPopup(true);
     setTimeout(() => {
@@ -31,6 +29,7 @@ function App() {
     { value: 'Canada Statistics', label: "Profile 2" }
   ];
 
+  // All HTML elements and components as they appear
   return (
 
     <div className = "container">
@@ -57,7 +56,6 @@ function App() {
       ))}
     </select>
 
-
       </div>
       <img className="logo" src={image} alt="SPCP Logo" />
       <div className="paragraphthree">
@@ -74,7 +72,6 @@ function App() {
 
       </div>
   
-     
     </div>
   );
 }
