@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import {readFile, utils} from 'xlsx';
 
 const SearchBar = () => { 
 
