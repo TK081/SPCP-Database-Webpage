@@ -7,9 +7,9 @@ const port = 5000;
 // Code to read in excel data file using XLSX & SheetJS
 const path = require('path');
 const XLSX = require('xlsx');
-const filePath = path.join(__dirname, 'excelfiles', 'testpractice.xlsx');
+const filePath = path.join(__dirname, 'excelfiles', 'praythisworks.xlsx');
 const workbook = XLSX.readFile(filePath);
-const sheetnames = workbook.SheetNames[2];
+const sheetnames = workbook.SheetNames[0];
 const worksheet = workbook.Sheets[sheetnames];
 // const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
 const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
@@ -23,7 +23,7 @@ const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
 
 // Get the number of rows in the worksheet
 const range = XLSX.utils.decode_range(worksheet['!ref']);
-const numRows = range.e.r + 1;
+const numRows = range.e.r;
 
 console.log('Number of rows in the worksheet:', numRows);
 console.log('Number of rows retrieved:', data.length);
