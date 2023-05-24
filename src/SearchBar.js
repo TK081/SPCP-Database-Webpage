@@ -15,13 +15,14 @@ const SearchBar = () => {
         //localStorage.setItem('searchQuery', searchQuery);
         event.preventDefault();
     
-    try {
-      const response = await axios.get(`/search?query=${searchQuery}`);
-      // Process the response data as needed
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+        try {
+            const response = await axios.get(`/search?query=${searchQuery}`);
+            // Process the response data as needed
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+        
     };
 
     return ( 
