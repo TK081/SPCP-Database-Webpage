@@ -15,6 +15,15 @@ const XLSX = require('xlsx');
 // console.log();
 // console.log(secondSheet);
 
+app.post('/search', (req, res) => {
+    const { searchQuery } = req.body;
+    // Perform any necessary actions with the search query
+    console.log(searchQuery);
+    // Send a response back to the client
+    res.send('Search results');
+  });
+  
+
 
 app.get('/', (req, res) => {
     res.send('Hello, World!'); // Send a simple message as a response
