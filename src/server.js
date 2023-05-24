@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-// const port = 5000;
+const port = 5000;
 
 
 
@@ -14,6 +14,12 @@ const XLSX = require('xlsx');
 // console.log(firstSheet);
 // console.log();
 // console.log(secondSheet);
+
+
+app.get('/', (req, res) => {
+    res.send('Hello, World!'); // Send a simple message as a response
+  });
+  
 
 app.get('/sheets/:sheetName', (req, res) => {
     const workbook = XLSX.readFile('excelfiles/2016_Statistics_Updated.xlsx');
@@ -36,11 +42,6 @@ app.get('/sheets/:sheetName', (req, res) => {
   app.listen(3000, () => {
     console.log('Server started on port 3000');
   });
-
-  app.get('/', (req, res) => {
-    res.send('Hello, World!'); // Send a simple message as a response
-  });
-  
 
 
 // app.get('/', (req, res) => {
