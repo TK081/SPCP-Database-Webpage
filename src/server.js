@@ -5,35 +5,44 @@
 // app.use(express.json());
 
 const express = require('express');
+const cors = require('cors');
 const app = express();
 app.use(express.static('public'));
 app.listen(8000, () => {
  console.log('Server is running on port 8000');
 });
 
+// Enable CORS for all routes
+app.use(cors());
+
 // Code to read in excel data file using XLSX & SheetJS
 const path = require('path');
 const XLSX = require('xlsx');
 const filePath = path.join(__dirname, 'excelfiles', 'praythisworks.xlsx');
-const workbook = XLSX.readFile(filePath);
-const sheetnames = workbook.SheetNames[1];
-const worksheet = workbook.Sheets[sheetnames];
-const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
-const range = XLSX.utils.decode_range(worksheet['!ref']);
-// Get the number of rows in the worksheet
-// const numRows = range.e.r + 1;
-const numRows = range.e.r;
-console.log('Number of rows in the worksheet:', numRows);
-console.log('Number of rows retrieved:', data.length);
-console.log('Data retrieval complete.');
 
-// Verify if all rows were retrieved
-if (data.length === numRows) {
-  console.log('All rows were successfully retrieved.');
-} else {
-  console.log('Some rows may not have been retrieved. Please verify your code.');
-}
-console.log("End of output");
+app.get('/sheetNames',(req, res) => {
+const workbook = XLSX.readFile(filePath);
+const sheetNames = workbook.SheetNames;
+res.json({sheetNames});
+//const worksheet = workbook.Sheets[sheetnames];
+//const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
+});
+
+// const range = XLSX.utils.decode_range(worksheet['!ref']);
+// // Get the number of rows in the worksheet
+// // const numRows = range.e.r + 1;
+// const numRows = range.e.r;
+// console.log('Number of rows in the worksheet:', numRows);
+// console.log('Number of rows retrieved:', data.length);
+// console.log('Data retrieval complete.');
+
+// // Verify if all rows were retrieved
+// if (data.length === numRows) {
+//   console.log('All rows were successfully retrieved.');
+// } else {
+//   console.log('Some rows may not have been retrieved. Please verify your code.');
+// }
+// console.log("End of output");
 
 
 // const firstSheet = workbook.Sheets[workbook.SheetNames[0]];

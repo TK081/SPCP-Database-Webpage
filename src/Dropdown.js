@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
     // const options = [
@@ -18,25 +18,50 @@ import axios from 'axios';
     // </div>
 
 const Dropdown = () => {
+  const [sheetNames, setSheetNames] = useState([]);
   const [selectedSheet, setSelectedSheet] = useState('');
 
   const handleSheetSelect = (event) => {
     setSelectedSheet(event.target.value);
   };
 
+  useEffect(() => {
+    axios.get('http://localhost:8000/sheetNames')
+    .then((response) => {
+    setSheetNames(response.data.sheetNames);
+    })
+    .catch((error) => {
+    // Handle any errors
+    });
+    }, []);
+   
+
   const handleSheetLoad = () => {
-    // Load the selected sheet here using SheetJS or any other library
-    console.log('Loading sheet:', selectedSheet);
-  };
+    if (sheetNames.includes(selectedSheet)) {
+      // The selected sheet is valid, load it
+      console.log('Loading sheet:', selectedSheet);
+    }
+
+    else {
+      // The selected sheet is not valid
+      console.log('Invalid sheet selection');
+    }
+      
+  }; 
 
   return (
     <div>
-      <select value={selectedSheet} onChange={handleSheetSelect} className='dropdown'>
-        <option value="">Select a sheet</option>
-        <option value="Sheet1">Peel Region Statistics</option>
-        <option value="Sheet2">Ontario Statistics</option>
-        {/* Add more options for each sheet */}
-      </select>
+
+<select value={selectedSheet} onChange={handleSheetSelect}>
+
+<option value="">Select a sheet</option>
+ {sheetNames.map((sheetNames) => (
+ <option key={sheetNames} value={sheetNames}>
+ {sheetNames}
+ </option>
+ ))}
+
+ </select>
       <button onClick={handleSheetLoad}>Load Sheet</button>
     </div>
   );
