@@ -1,18 +1,20 @@
 const express = require('express');
 const app = express();
-const port = 5000;
+const port = 3001;
 
-
+app.use(express.json());
 
 // Code to read in excel data file using XLSX & SheetJS
-const path = require('path');
-const XLSX = require('xlsx');
-const filePath = path.join(__dirname, 'excelfiles', 'praythisworks.xlsx');
-const workbook = XLSX.readFile(filePath);
-const sheetnames = workbook.SheetNames[1];
-const worksheet = workbook.Sheets[sheetnames];
+
+// const path = require('path');
+// const XLSX = require('xlsx');
+// const filePath = path.join(__dirname, 'excelfiles', 'praythisworks.xlsx');
+// const workbook = XLSX.readFile(filePath);
+// const sheetnames = workbook.SheetNames[1];
+// const worksheet = workbook.Sheets[sheetnames];
+
 // const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
+// const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
 // const secondSheet = workbook.Sheets[workbook.SheetNames[1]];
 // console.dir(data);
 // const pageSize = 225; // Number of items to display per page
@@ -22,30 +24,30 @@ const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
 // }
 
 // Get the number of rows in the worksheet
-const range = XLSX.utils.decode_range(worksheet['!ref']);
+// const range = XLSX.utils.decode_range(worksheet['!ref']);
 // const numRows = range.e.r + 1;
-const numRows = range.e.r;
+// const numRows = range.e.r;
 
-console.log('Number of rows in the worksheet:', numRows);
-console.log('Number of rows retrieved:', data.length);
-console.log('Data retrieval complete.');
+// console.log('Number of rows in the worksheet:', numRows);
+// console.log('Number of rows retrieved:', data.length);
+// console.log('Data retrieval complete.');
 
 // Verify if all rows were retrieved
-if (data.length === numRows) {
-  console.log('All rows were successfully retrieved.');
-} else {
-  console.log('Some rows may not have been retrieved. Please verify your code.');
-}
-console.log("End of output");
+// if (data.length === numRows) {
+//   console.log('All rows were successfully retrieved.');
+// } else {
+//   console.log('Some rows may not have been retrieved. Please verify your code.');
+// }
+// console.log("End of output");
 // console.log(secondSheet);
 
-// app.post('/search', (req, res) => {
-//     const { searchQuery } = req.body;
-//     // Perform any necessary actions with the search query
-//     console.log(searchQuery);
-//     // Send a response back to the client
-//     res.send('Search results');
-//   });
+app.post('/search', (req, res) => {
+    const { searchQuery } = req.body;
+    // Perform any necessary actions with the search query
+    console.log(searchQuery);
+    // Send a response back to the client
+    res.send('Search results');
+  });
   
 
 
