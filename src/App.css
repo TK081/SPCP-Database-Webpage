@@ -10,10 +10,10 @@
 }
 
 .search{
- font-family: 'Montserrat', sans-serif;
- align-items: center;
- justify-content: flex-start;
- background: beige ;
+  font-family: 'Montserrat', sans-serif;
+  align-items: center;
+  justify-content: flex-start;
+  background: beige ;
 }
 
 .paragraph{
@@ -40,9 +40,7 @@
   line-height: 1.0;
   background: beige ;
   color: #474834;
-
 }
-
 
 .dropdown{
   background: beige ;
@@ -59,22 +57,18 @@
 }
 
 .dropdown:box{
-  
   background: beige ;
   color: #474834;
-
 }
 
 .dropdown:click{
-border: 2px #474834 solid;
-box-shadow:0 0 0.8em #474834;  
+  border: 2px #474834 solid;
+  box-shadow:0 0 0.8em #474834;  
 }
 
 .dropdown:hover{
-background: rgb(204, 204, 184) ;
-
+  background: rgb(204, 204, 184) ;
 }
-
 
 .search-bar {
   width:  550px;
@@ -88,7 +82,6 @@ background: rgb(204, 204, 184) ;
   font-size: 20px;
   color: #474834;;
 }
-
 
 .search-button {
   background: #00C9B0;
@@ -106,8 +99,6 @@ background: rgb(204, 204, 184) ;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
 }
-
-
 
 .button {
   background-color: #00C9B0;

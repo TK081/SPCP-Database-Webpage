@@ -3,9 +3,8 @@ import './App.css';
 import image from './images/spcp.jpg';
 import {FaQuestion , FaDownload} from 'react-icons/fa';
 import SearchBar from "./SearchBar";
+import Dropdown from "./Dropdown";
 import 'typeface-montserrat';
-
-// Hi
 
 function App() {
 
@@ -16,24 +15,18 @@ function App() {
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 5000); // Hide the popup after 2 seconds
+    }, 5000); // Hide the popup after 5 seconds
   };
-
-  // Code for drop down menu for excel files
-  const [selectedSheet, setSelectedSheet] = useState("");
-
-  const options = [
-    { value: 'Peel Region Statistics', label: "Profile 1" },
-    { value: 'Canada Statistics', label: "Profile 2" }
-  ];
 
   // All HTML elements and components as they appear
   return (
 
     <div className = "container">
 
+      // Title of Webpage
       <h1>Portraits of Peel Database Webpage</h1>
 
+      // Paragraph #1
       <div className = "paragraph">
         <p>Are you looking for information about South Asians within Peel, provincially, or nationally? </p>  
         <p>Look no further! Portraits of Peel has been collecting data since 1965 and helping curious </p> 
@@ -41,13 +34,15 @@ function App() {
         <p>get the information you need :)</p>
       </div>
 
+      // Paragraph #2
       <div className="paragraphtwo">
         <h2>Dropdown Menu</h2>
         <p>This dropdown menu will allow you to cycle through three different profiles, which</p>
         <p>all contain unique data for specific areas.</p>
       </div>
 
-      <div >
+      // Old commented dropdown menu code
+      {/* <div >
         <select className="dropdown" value={selectedSheet} onChange={(event) => setSelectedSheet(event.target.value)}>
         <option value="">Select Excel File</option>
         {options.map((option) => (
@@ -56,18 +51,25 @@ function App() {
           </option>
         ))}
         </select>
-      </div>
+      </div> */}
 
+      // Dropdown Menu Component
+       <Dropdown/>
+
+      // Logo
       <img className="logo" src={image} alt="SPCP Logo" />
 
+      // Paragraph #3
       <div className="paragraphthree">
         <h2>Searchbar for database and search queries </h2>
         <p>This search bar allows for the user to input unique searches, which will allow</p>
         <p> for the needed table of data to be outputted.</p>
       </div>
 
+      // Search Bar Component
         <SearchBar/>
 
+      // Help & Download Buttons
       <div>
         <button className="button" onClick={handleHelp}><FaQuestion/></button>
         {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}
