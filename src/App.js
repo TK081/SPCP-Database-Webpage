@@ -23,10 +23,10 @@ function App() {
 
     <div className = "container">
 
-      // Title of Webpage
+      {/* // Title of Webpage */}
       <h1>Portraits of Peel Database Webpage</h1>
 
-      // Paragraph #1
+      {/* // Paragraph #1 */}
       <div className = "paragraph">
         <p>Are you looking for information about South Asians within Peel, provincially, or nationally? </p>  
         <p>Look no further! Portraits of Peel has been collecting data since 1965 and helping curious </p> 
@@ -34,14 +34,14 @@ function App() {
         <p>get the information you need :)</p>
       </div>
 
-      // Paragraph #2
+      {/* // Paragraph #2 */}
       <div className="paragraphtwo">
         <h2>Dropdown Menu</h2>
         <p>This dropdown menu will allow you to cycle through three different profiles, which</p>
         <p>all contain unique data for specific areas.</p>
       </div>
 
-      // Old commented dropdown menu code
+      {/* // Old commented dropdown menu code */}
       {/* <div >
         <select className="dropdown" value={selectedSheet} onChange={(event) => setSelectedSheet(event.target.value)}>
         <option value="">Select Excel File</option>
@@ -53,23 +53,23 @@ function App() {
         </select>
       </div> */}
 
-      // Dropdown Menu Component
+      {/* // Dropdown Menu Component */}
        <Dropdown/>
 
-      // Logo
+      {/* // Logo */}
       <img className="logo" src={image} alt="SPCP Logo" />
 
-      // Paragraph #3
+      {/* // Paragraph #3 */}
       <div className="paragraphthree">
         <h2>Searchbar for database and search queries </h2>
         <p>This search bar allows for the user to input unique searches, which will allow</p>
         <p> for the needed table of data to be outputted.</p>
       </div>
 
-      // Search Bar Component
+      {/* // Search Bar Component */}
         <SearchBar/>
 
-      // Help & Download Buttons
+      {/* // Help & Download Buttons */}
       <div>
         <button className="button" onClick={handleHelp}><FaQuestion/></button>
         {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}

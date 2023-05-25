@@ -4,30 +4,25 @@
 
 // app.use(express.json());
 
-// Code to read in excel data file using XLSX & SheetJS
+const express = require('express');
+const app = express();
+app.use(express.static('public'));
+app.listen(8000, () => {
+ console.log('Server is running on port 8000');
+});
 
+// Code to read in excel data file using XLSX & SheetJS
 const path = require('path');
 const XLSX = require('xlsx');
 const filePath = path.join(__dirname, 'excelfiles', 'praythisworks.xlsx');
 const workbook = XLSX.readFile(filePath);
 const sheetnames = workbook.SheetNames[1];
 const worksheet = workbook.Sheets[sheetnames];
-
-// const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
 const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
-// const secondSheet = workbook.Sheets[workbook.SheetNames[1]];
-// console.dir(data);
-// const pageSize = 225; // Number of items to display per page
-// for (let i = 0; i < data.length; i += pageSize) {
-//   const currentPage = data.slice(i, i + pageSize);
-//   console.dir(currentPage);
-// }
-
-// Get the number of rows in the worksheet
 const range = XLSX.utils.decode_range(worksheet['!ref']);
+// Get the number of rows in the worksheet
 // const numRows = range.e.r + 1;
 const numRows = range.e.r;
-
 console.log('Number of rows in the worksheet:', numRows);
 console.log('Number of rows retrieved:', data.length);
 console.log('Data retrieval complete.');
@@ -39,7 +34,16 @@ if (data.length === numRows) {
   console.log('Some rows may not have been retrieved. Please verify your code.');
 }
 console.log("End of output");
-// console.log(secondSheet);
+
+
+// const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+// const secondSheet = workbook.Sheets[workbook.SheetNames[1]];
+// console.dir(data);
+// const pageSize = 225; // Number of items to display per page
+// for (let i = 0; i < data.length; i += pageSize) {
+//   const currentPage = data.slice(i, i + pageSize);
+//   console.dir(currentPage);
+// }
 
 // app.post('/search', (req, res) => {
 //     const { searchQuery } = req.body;

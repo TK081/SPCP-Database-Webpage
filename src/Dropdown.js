@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-// const options = [
-//   { value: 'Peel Region Statistics', label: "Profile 1" },
-//   { value: 'Canada Statistics', label: "Profile 2" }
-// ];
+    // const options = [
+    //   { value: 'Peel Region Statistics', label: "Profile 1" },
+    //   { value: 'Canada Statistics', label: "Profile 2" }
+    // ];
 
-    <div>
-    <select className="dropdown" value={selectedSheet} onChange={(event) => setSelectedSheet(event.target.value)}>
-    <option value="">Select Excel File</option>
-    {options.map((option) => (
-        <option key={option.value} value={option.value}>
-            {option.label}
-        </option>
-    ))}
-    </select>
-    </div>
+    // <div>
+    // <select className="dropdown" value={selectedSheet} onChange={(event) => setSelectedSheet(event.target.value)}>
+    // <option value="">Select Excel File</option>
+    // {options.map((option) => (
+    //     <option key={option.value} value={option.value}>
+    //         {option.label}
+    //     </option>
+    // ))}
+    // </select>
+    // </div>
 
 const Dropdown = () => {
   const [selectedSheet, setSelectedSheet] = useState('');
@@ -30,7 +31,7 @@ const Dropdown = () => {
 
   return (
     <div>
-      <select value={selectedSheet} onChange={handleSheetSelect}>
+      <select value={selectedSheet} onChange={handleSheetSelect} className='dropdown'>
         <option value="">Select a sheet</option>
         <option value="Sheet1">Peel Region Statistics</option>
         <option value="Sheet2">Ontario Statistics</option>
