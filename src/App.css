@@ -16,6 +16,14 @@
   background: beige ;
 }
 
+.menu{
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: beige ;
+}
+
 .paragraph{
   font-family: 'Montserrat', sans-serif;
   text-align: center;

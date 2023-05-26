@@ -50,9 +50,9 @@ const Dropdown = () => {
   }; 
 
   return (
-    <div>
+    <div className="menu">
 
-<select value={selectedSheet} onChange={handleSheetSelect}>
+<select className="dropdown" value={selectedSheet} onChange={handleSheetSelect}>
 
 <option value="">Select a sheet</option>
  {sheetNames.map((sheetNames) => (
@@ -62,7 +62,7 @@ const Dropdown = () => {
  ))}
 
  </select>
-      <button onClick={handleSheetLoad}>Load Sheet</button>
+      <button className="button" onClick={handleSheetLoad}>Load Sheet</button>
     </div>
   );
 };
