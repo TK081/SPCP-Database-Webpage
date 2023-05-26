@@ -18,10 +18,17 @@ const path = require('path');
 const XLSX = require('xlsx');
 const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 
+
+// Check endpoint in btoh server.js & Dropdown.js
 app.get('/sheetNames',(req, res) => {
-const workbook = XLSX.readFile(filePath);
-const sheetName = workbook.SheetNames;
-res.json({sheetName});
+  const workbook = XLSX.readFile(filePath);
+  // const sheetName = workbook.SheetNames;
+  const sheetName = req.params.sheetName;
+  const sheet = workbook.Sheets[sheetName];
+  const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+  res.json({ sheetData: jsonData });
+
+  // res.json({sheetName});
 //const worksheet = workbook.Sheets[sheetnames];
 //const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
 });
