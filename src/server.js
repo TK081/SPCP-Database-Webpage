@@ -7,10 +7,8 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const port = 8000
 app.use(express.static('public'));
-app.listen(8000, () => {
- console.log('Server is running on port 8000');
-});
 
 // Enable CORS for all routes
 app.use(cors());
@@ -26,6 +24,15 @@ const sheetNames = workbook.SheetNames;
 res.json({sheetNames});
 //const worksheet = workbook.Sheets[sheetnames];
 //const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
+});
+
+app.get('api/search', (req, res) => {
+  const searchQuery = req.searchQuery.searchQuery;
+  // Implement our own search logic 
+});
+
+app.listen(port, () => {
+  console.log('Server is running on port 8000');
 });
 
 // const range = XLSX.utils.decode_range(worksheet['!ref']);
