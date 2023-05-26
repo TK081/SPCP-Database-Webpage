@@ -4,24 +4,33 @@ import axios from 'axios';
 
 const SearchBar = () => { 
 
-    const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState('');
+    const [query , setSearchQuery] = useState('');
+    // const [searchResults, setSearchResults] = useState('');
 
     const handleSearchQuery = (event) => {
         setSearchQuery(event.target.value);
     };
 
-    const handleSearchClick = async (event) => {
+    const handleSearchClick = (event) => {
         //localStorage.setItem('searchQuery', searchQuery);
         event.preventDefault();
+        axios.get('http://localhost:8000/test' ,{params: {query} })
+        .then((response) => {
+            //setSearchQuery(response.data.query)
+            console.log('Search Results:', response.data); 
+        })
+
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     
-        try {
-            const response = await axios.get(`/search?query=${searchQuery}`);
-            // Process the response data as needed
-            console.log(response.data);
-        } catch (error) {
-            console.error(error);
-        }
+        // try {
+        //     const response = await axios.get(`/search?query=${searchQuery}`);
+        //     // Process the response data as needed
+        //     console.log(response.data);
+        // } catch (error) {
+        //     console.error(error);
+        // }
         
     };
 
@@ -30,13 +39,13 @@ const SearchBar = () => {
         <div class = "search"> 
             <input className="search-bar"
                 type="text"
-                value={searchQuery}
+                value={query}
                 onChange={handleSearchQuery}
                 placeholder="Search..."
             />
-            <button className="search-button" onClick={handleSearchClick}><FaSearch/></button>
+            <button className="search-button" type ="submit"><FaSearch/></button>
             <div>
-                {searchResults}
+                {setSearchQuery}
             </div>
         </div> 
 

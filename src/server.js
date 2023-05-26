@@ -20,15 +20,20 @@ const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 
 app.get('/sheetNames',(req, res) => {
 const workbook = XLSX.readFile(filePath);
-const sheetNames = workbook.SheetNames;
-res.json({sheetNames});
+const sheetName = workbook.SheetNames;
+res.json({sheetName});
 //const worksheet = workbook.Sheets[sheetnames];
 //const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
 });
 
-app.get('api/search', (req, res) => {
-  const searchQuery = req.searchQuery.searchQuery;
-  // Implement our own search logic 
+app.get('/test', (req, res) => {
+    //res.send('Hello from the search endpoint');
+
+    console.log('Received request at /api/search');
+  const query = req.query.query;
+//   // Implement our own search logic 
+console.log('Query:',query);
+//   res.json(query)
 });
 
 app.listen(port, () => {
