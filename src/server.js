@@ -16,7 +16,7 @@ app.use(cors());
 // Code to read in excel data file using XLSX & SheetJS
 const path = require('path');
 const XLSX = require('xlsx');
-const filePath = path.join(__dirname, 'excelfiles', 'praythisworks.xlsx');
+const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 
 app.get('/sheetNames',(req, res) => {
 const workbook = XLSX.readFile(filePath);
