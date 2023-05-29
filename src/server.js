@@ -18,13 +18,20 @@ const path = require('path');
 const XLSX = require('xlsx');
 const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 
+app.get('/api/sheetNames', (req, res) => {
+  const workbook = XLSX.readFile(filePath);
+  const sheetNames = workbook.SheetNames;
+  res.json({ sheetNames });
+});
+
 // Check endpoint in both server.js & Dropdown.js
-app.get('/api/sheet',(req, res) => {
+app.get('/api/sheet/:sheetName',(req, res) => {
 
   const workbook = XLSX.readFile(filePath);
-  const sheetName = req.params.sheetName;
+  const sheetName = decodeURIComponent(req.params.sheetName);
   const sheet = workbook.Sheets[sheetName];
-  const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+  console.log('Sheet Object:', sheet);
+  const jsonData = XLSX.utils.sheet_to_json(sheet);
   res.json({ sheetData: jsonData });
 
   // const sheetName = workbook.SheetNames;

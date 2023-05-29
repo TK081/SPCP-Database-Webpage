@@ -22,16 +22,22 @@ const Dropdown = () => {
   const [selectedSheet, setSelectedSheet] = useState('');
 
   const handleSheetSelect = (event) => {
-    setSheetNames(event.target.value);
+    setSelectedSheet(event.target.value);
   };
 
   useEffect(() => {
-    axios.get('http://localhost:8000/sheet')
+
+//     axios.get('http://localhost:8000/api/sheet', {
+//   params: {
+//     sheetName: 'Peel Region Statistics' // Use the correct sheet name from your Excel file
+//   }
+// })
+    axios.get('http://localhost:8000/api/sheetNames')
     .then((response) => {
-      setSelectedSheet(response.data.selectedSheet);
+    setSheetNames(response.data.sheetNames);
     })
     .catch((error) => {
-      // Handle any errors
+    //   // Handle any errors
     });
     }, []);
    
@@ -39,10 +45,19 @@ const Dropdown = () => {
   const handleSheetLoad = () => {
     if (sheetNames.includes(selectedSheet)) {
       // The selected sheet is valid, load it
-      console.log('Loading sheet:', selectedSheet);
-    }
-
-    else {
+      axios.get('http://localhost:8000/api/sheet/${encodeURIComponent(selectedSheet)}', {
+        params: {
+          sheetName: selectedSheet
+        }
+      })
+        .then((response) => {
+          // Handle the response with the selected sheet data in the backend
+          console.log('Selected Sheet Data:', response.data.sheetData);
+        })
+        .catch((error) => {
+          // Handle any errors
+        });
+    } else {
       // The selected sheet is not valid
       console.log('Invalid sheet selection');
     }
