@@ -18,9 +18,9 @@ const path = require('path');
 const XLSX = require('xlsx');
 const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 
-
 // Check endpoint in btoh server.js & Dropdown.js
-app.get('/sheetNames',(req, res) => {
+app.get('/api/sheet',(req, res) => {
+
   const workbook = XLSX.readFile(filePath);
   // const sheetName = workbook.SheetNames;
   const sheetName = req.params.sheetName;
@@ -29,22 +29,26 @@ app.get('/sheetNames',(req, res) => {
   res.json({ sheetData: jsonData });
 
   // res.json({sheetName});
-//const worksheet = workbook.Sheets[sheetnames];
-//const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
+  //const worksheet = workbook.Sheets[sheetnames];
+  //const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
+  
 });
 
-app.get('/test', (req, res) => {
-    //res.send('Hello from the search endpoint');
+app.get('/api/search', (req, res) => {
 
-    console.log('Received request at /api/search');
+  //res.send('Hello from the search endpoint');
+  console.log('Received request at /api/search');
   const query = req.query.query;
-//   // Implement our own search logic 
-console.log('Query:',query);
-//   res.json(query)
+  // Implement our own search logic 
+  console.log('Query:',query);
+  // res.json(query)
+
 });
 
 app.listen(port, () => {
+
   console.log('Server is running on port 8000');
+
 });
 
 // const range = XLSX.utils.decode_range(worksheet['!ref']);
@@ -63,7 +67,6 @@ app.listen(port, () => {
 // }
 // console.log("End of output");
 
-
 // const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
 // const secondSheet = workbook.Sheets[workbook.SheetNames[1]];
 // console.dir(data);
@@ -80,13 +83,10 @@ app.listen(port, () => {
 //     // Send a response back to the client
 //     res.send('Search results');
 //   });
-  
-
 
 // app.get('/', (req, res) => {
 //     res.send('Hello, World!'); // Send a simple message as a response
 //   });
-  
 
 // app.get('/sheets/:sheetName', (req, res) => {
 //     const workbook = XLSX.readFile('excelfiles/2016_Statistics_Updated.xlsx');
@@ -109,7 +109,6 @@ app.listen(port, () => {
 //   app.listen(3000, () => {
 //     console.log('Server started on port 3000');
 //   });
-
 
 // app.get('/', (req, res) => {
 //   res.send('Hello from Express!');

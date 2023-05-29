@@ -22,16 +22,16 @@ const Dropdown = () => {
   const [selectedSheet, setSelectedSheet] = useState('');
 
   const handleSheetSelect = (event) => {
-    setSelectedSheet(event.target.value);
+    setSheetNames(event.target.value);
   };
 
   useEffect(() => {
-    axios.get('http://localhost:8000/sheetNames')
+    axios.get('http://localhost:8000/sheet')
     .then((response) => {
-    setSheetNames(response.data.sheetNames);
+      setSelectedSheet(response.data.selectedSheet);
     })
     .catch((error) => {
-    // Handle any errors
+      // Handle any errors
     });
     }, []);
    
@@ -55,10 +55,10 @@ const Dropdown = () => {
 <select value={selectedSheet} onChange={handleSheetSelect}>
 
 <option value="">Select a sheet</option>
- {sheetNames.map((sheetNames) => (
- <option key={sheetNames} value={sheetNames}>
- {sheetNames}
- </option>
+    {sheetNames.map((sheetNames) => (
+    <option key={sheetNames} value={sheetNames}>
+    {sheetNames}
+    </option>
  ))}
 
  </select>
