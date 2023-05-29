@@ -18,7 +18,7 @@ const path = require('path');
 const XLSX = require('xlsx');
 const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 
-// Check endpoint in btoh server.js & Dropdown.js
+// Check endpoint in both server.js & Dropdown.js
 app.get('/api/sheet',(req, res) => {
 
   const workbook = XLSX.readFile(filePath);
@@ -31,7 +31,7 @@ app.get('/api/sheet',(req, res) => {
   // res.json({sheetName});
   //const worksheet = workbook.Sheets[sheetnames];
   //const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
-  
+
 });
 
 app.get('/api/search', (req, res) => {
@@ -41,7 +41,7 @@ app.get('/api/search', (req, res) => {
   const query = req.query.query;
   // Implement our own search logic 
   console.log('Query:',query);
-  // res.json(query)
+  res.json(query)
 
 });
 
