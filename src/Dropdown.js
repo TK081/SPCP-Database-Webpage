@@ -1,22 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-    // const options = [
-    //   { value: 'Peel Region Statistics', label: "Profile 1" },
-    //   { value: 'Canada Statistics', label: "Profile 2" }
-    // ];
-
-    // <div>
-    // <select className="dropdown" value={selectedSheet} onChange={(event) => setSelectedSheet(event.target.value)}>
-    // <option value="">Select Excel File</option>
-    // {options.map((option) => (
-    //     <option key={option.value} value={option.value}>
-    //         {option.label}
-    //     </option>
-    // ))}
-    // </select>
-    // </div>
-
 const Dropdown = () => {
   const [sheetNames, setSheetNames] = useState([]);
   const [selectedSheet, setSelectedSheet] = useState('');
@@ -67,7 +51,7 @@ const Dropdown = () => {
   return (
     <div>
 
-<select value={selectedSheet} onChange={handleSheetSelect}>
+<select className='dropdown' value={selectedSheet} onChange={handleSheetSelect}>
 
 <option value="">Select a sheet</option>
     {sheetNames.map((sheetNames) => (
@@ -77,7 +61,7 @@ const Dropdown = () => {
  ))}
 
  </select>
-      <button onClick={handleSheetLoad}>Load Sheet</button>
+      <button className ='button' onClick={handleSheetLoad}>Load Sheet</button>
     </div>
   );
 };

@@ -41,18 +41,6 @@ function App() {
         <p>all contain unique data for specific areas.</p>
       </div>
 
-      {/* // Old commented dropdown menu code */}
-      {/* <div >
-        <select className="dropdown" value={selectedSheet} onChange={(event) => setSelectedSheet(event.target.value)}>
-        <option value="">Select Excel File</option>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-        </select>
-      </div> */}
-
       {/* // Dropdown Menu Component */}
        <Dropdown/>
 
