@@ -38,6 +38,8 @@ app.get('/api/sheet/:sheetName',(req, res) => {
 
 });
 
+// http://localhost:8000/api/search?query=helloworld
+
 app.get('/api/search', (req, res) => {
 
   //res.send('Hello from the search endpoint');
