@@ -50,6 +50,27 @@
   color: #474834;
 }
 
+.AlertContainer{
+  padding: 10px;
+  display: flex;
+  text-align: center;
+  justify-content: flex-start;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.success{
+  background-color: #d7f8dc;
+  color: #1c7222;
+  border: 1px solid #d7f8dc;
+}
+
+.error{
+  background-color: #f8d7d7;
+  color: #721c1c;
+  border: 1px solid #f8d7d7;
+}
+
 .dropdown{
   background: beige ;
   color: #474834;

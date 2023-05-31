@@ -4,9 +4,16 @@ import axios from 'axios';
 const Dropdown = () => {
   const [sheetNames, setSheetNames] = useState([]);
   const [selectedSheet, setSelectedSheet] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState('');
 
   const handleSheetSelect = (event) => {
     setSelectedSheet(event.target.value);
+  };
+
+  const Alert = ({ message ,type}) => {
+    return <div className={`AlertContainer ${type}`}>{message}</div>;
   };
 
   useEffect(() => {
@@ -38,13 +45,20 @@ const Dropdown = () => {
       })
         .then((response) => {
           // Handle the response with the selected sheet data in the backend
+          setShowAlert(true);
+          setAlertMessage('Data Loaded successfully!');
+          setAlertType('success');
           console.log('Selected Sheet Data:', response.data.sheetData);
         })
         .catch((error) => {
-          // Handle any errors
+          setShowAlert(true);
+          setAlertMessage('Data Loaded unsuccessfully!');
+          setAlertType('error');
+           // Handle any errors
         });
     } else {
-      // The selected sheet is not valid
+      setAlertMessage('Invalid sheet selection');
+      setAlertType('error');// The selected sheet is not valid
       console.log('Invalid sheet selection');
     }
       
@@ -52,6 +66,7 @@ const Dropdown = () => {
 
   return (
     <div>
+    <div className="menu">
 
 <select className='dropdown' value={selectedSheet} onChange={handleSheetSelect}>
 
@@ -63,7 +78,9 @@ const Dropdown = () => {
  ))}
 
  </select>
-      <button className ='button' onClick={handleSheetLoad}>Load Sheet</button>
+ <button className ='button' onClick={handleSheetLoad}>Load Sheet</button>
+    </div>
+    {showAlert && <Alert message={alertMessage} type={alertType} />}
     </div>
   );
 };
