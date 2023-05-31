@@ -5,6 +5,17 @@ const app = express();
 const port = 8000
 app.use(express.static('public'));
 
+/* 
+*-----------------------*
+* Packages              *
+*                       *
+* npm install axios     *
+* npm install xlsx      *
+* npm install cors      *
+*-----------------------*
+*/
+
+
 // Enable CORS for all routes
 app.use(cors());
 

@@ -6,6 +6,15 @@ import SearchBar from "./SearchBar";
 import Dropdown from "./Dropdown";
 import 'typeface-montserrat';
 
+/* 
+*------------------------------------*
+*  Packages                          *
+*                                    *
+*   npm install react-icons --sav    *
+*   npm install typeface-montserrat  *
+*------------------------------------*
+*/
+
 function App() {
 
   // Code for help button pop up message
