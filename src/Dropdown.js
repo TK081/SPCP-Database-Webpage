@@ -18,7 +18,8 @@ const Dropdown = () => {
 // })
     axios.get('http://localhost:8000/api/sheetNames')
     .then((response) => {
-    setSheetNames(response.data.sheetNames);
+      console.log(response);
+      setSheetNames(response.data.sheetNames);
     })
     .catch((error) => {
     //   // Handle any errors
@@ -29,7 +30,8 @@ const Dropdown = () => {
   const handleSheetLoad = () => {
     if (sheetNames.includes(selectedSheet)) {
       // The selected sheet is valid, load it
-      axios.get('http://localhost:8000/api/sheet/${encodeURIComponent(selectedSheet)}', {
+      // console.log('This is the selected sheet:', selectedSheet);
+      axios.get(`http://localhost:8000/api/sheet/${encodeURIComponent(selectedSheet)}`, {
         params: {
           sheetName: selectedSheet
         }

@@ -14,7 +14,7 @@ const SearchBar = () => {
     const handleSearchClick = (event) => {
         //localStorage.setItem('searchQuery', searchQuery);
         event.preventDefault();
-        axios.get('http://localhost:8000/api/search' ,{params: {query} })
+        axios.get('http://localhost:8000/api/search', {params: {query}})
         .then((response) => {
             // setSearchQuery(response.data.query)
             console.log('Search Results:', response.data); 
