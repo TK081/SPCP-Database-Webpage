@@ -7,6 +7,7 @@
   height: 100vh;
   font-family: 'Montserrat', sans-serif;
   color: #474834;
+  min-height: 135vh;
 }
 
 .search{
