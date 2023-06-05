@@ -95,6 +95,20 @@ app.get('/api/sheet/:sheetName', async (req, res) => {
 //   res.json({ sheetNames });
 // });
 
+// ExcelJS Get Request for sheetNames
+// app.get('/api/sheetNames', (req, res) => {
+//   const workbook = new ExcelJS.Workbook();
+//   workbook.xlsx.readFile(filePath)
+//     .then(() => {
+//       const sheetNames = workbook.sheetNames;
+//       res.json({ sheetNames });
+//     })
+//     .catch((error) => {
+//       res.status(500).json({ error: 'Failed to read the file' });
+//     });
+// });
+
+
 // Check endpoint in both server.js & Dropdown.js
 // http://localhost:8000/api/sheet/Canada%20Statistics
 // http://localhost:8000/api/sheet/Peel%20Region%20Statistics
@@ -115,16 +129,16 @@ app.get('/api/sheet/:sheetName', async (req, res) => {
 // });
 
 // http://localhost:8000/api/search?query=helloworld
-// app.get('/api/search', (req, res) => {
+app.get('/api/search', (req, res) => {
 
-//   //res.send('Hello from the search endpoint');
-//   console.log('Received request at /api/search');
-//   const query = req.query.query;
-//   // Implement our own search logic 
-//   console.log('Query:',query);
-//   res.json(query)
+  //res.send('Hello from the search endpoint');
+  console.log('Received request at /api/search');
+  const query = req.query.query;
+  // Implement our own search logic 
+  console.log('Query:',query);
+  res.json(query)
 
-// });
+});
 
 app.listen(port, () => {
   console.log('Server is running on port 8000');
