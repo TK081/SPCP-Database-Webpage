@@ -72,6 +72,23 @@ const readExcel = async () => {
 
 // readExcel();
 
+app.get('/api/sheetNames', async (req, res) => {
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.readFile(filePath);
+  const sheetNames = workbook.worksheets.map(sheet => decodeURIComponent(sheet.name));
+  res.json({ sheetNames });
+});
+
+app.get('/api/sheet/:sheetName', async (req, res) => {
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.readFile(filePath);
+  const sheetName = decodeURIComponent(req.params.sheetName);
+  const sheet = workbook.getWorksheet(sheetName);
+  console.log('Sheet Object:', sheet);
+  const jsonData = sheet.getSheetValues();
+  res.json({ sheetData: jsonData });
+});
+
 // app.get('/api/sheetNames', (req, res) => {
 //   const workbook = XLSX.readFile(filePath);
 //   const sheetNames = workbook.SheetNames;
@@ -90,10 +107,10 @@ const readExcel = async () => {
 //   const jsonData = XLSX.utils.sheet_to_json(sheet);
 //   res.json({ sheetData: jsonData });
 
-//   // const sheetName = workbook.SheetNames;
-//   // res.json({sheetName});
-//   //const worksheet = workbook.Sheets[sheetnames];
-//   //const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
+  // const sheetName = workbook.SheetNames;
+  // res.json({sheetName});
+  //const worksheet = workbook.Sheets[sheetnames];
+  //const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
 
 // });
 

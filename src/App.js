@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState , useRef} from "react";
 import './App.css';
 import image from './images/spcp.jpg';
+import imagetwo from './images/questionmark.png'
 import {FaQuestion , FaDownload} from 'react-icons/fa';
 import SearchBar from "./SearchBar";
 import Dropdown from "./Dropdown";
@@ -18,16 +19,27 @@ import 'typeface-montserrat';
 function App() {
 
   // Code for help button pop up message
-  const [showPopup, setShowPopup] = useState('');
+  // const [showPopup, setShowPopup] = useState('');
 
-  const handleHelp = () => {
-    setShowPopup(true);
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 5000); // Hide the popup after 5 seconds
-  };
+  // const handleHelp = () => {
+  //   setShowPopup(true);
+  //   setTimeout(() => {
+  //     setShowPopup(false);
+  //   }, 5000); // Hide the popup after 5 seconds
+  // };
 
   // All HTML elements and components as they appear
+
+  const popupRef = useRef(null);
+
+  function openPopup(){
+popupRef.current.classList.add("open-popup")
+  }
+
+  function closePopup(){
+    popupRef.current.classList.remove("open-popup")
+      }
+
   return (
 
     <div className = "container">
@@ -68,8 +80,13 @@ function App() {
 
       {/* // Help & Download Buttons */}
       <div>
-        <button className="button" onClick={handleHelp}><FaQuestion/></button>
-        {showPopup && <div className="popup">Search in this format: "Indicator/Area"</div>}
+        <button className="button" type ="submit" onClick={openPopup}><FaQuestion/></button>
+        <div className="popup" ref={popupRef} id="popup">
+          <img src={imagetwo} />
+          <h2>Help</h2>
+          <p>Search in this format: "Indicator/Area</p>
+          <button type="button" onClick={closePopup}>OK</button>
+        </div>
         <button className="button"><FaDownload/></button>
       </div>
 
