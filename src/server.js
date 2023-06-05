@@ -24,43 +24,52 @@ const XLSX = require('xlsx');
 const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 
 // Load the workbook
-const workbook = XLSX.readFile(filePath);
+const workbook = XLSX.readFile(filePath, {cellStyles:true});
 const sheetName = 'Peel Region Statistics'; // Replace with the actual sheet name
-const sheet = workbook.Sheets[sheetName];
+const worksheet = workbook.Sheets[sheetName];
 const columnLetter = 'A';
 const boldedCells = [];
 
-// for (let row = 1; worksheet[`${columnLetter}${row}`]; row++) {
-//   const cell = worksheet[`${columnLetter}${row}`];
-//   // console.log(cell);
-
-//   if (cell.s && cell.s.bold) {
-//     boldedCells.push(cell.v); // Append the cell value to the array
-//     // console.log(cell.s);
-//     // console.log(cell.s.bold);
-//   }
+// function PrintAndReturn(value, label){
+//   console.log(`${label}: ${value}`);
+//   return value;
 // }
-for (let cellAddress in sheet) {
-  if (sheet.hasOwnProperty(cellAddress)) {
-    // Get the cell value and style
-    const cell = sheet[cellAddress];
-    const value = cell.v;
-    const style = cell.s;
-    // console.log(cell);
-    // console.log(value);
-    // console.log(style);
 
-    // Check if the cell is in the first column and has bold formatting
-    if (cellAddress.match(/^  A\d+$/) && style && style.font && style.font.bold) {
-      // Add the cell value to the boldedCells array
-      // console.log(value);
-      // console.log(style);
-      boldedCells.push(value);
-    }
+for (let row = 1; worksheet[`${columnLetter}${row}`] || worksheet[`${columnLetter}${row + 1}`]; row++) {
+  const cell = worksheet[`${columnLetter}${row}`];
+  console.log(cell);
+  if (!cell){
+    continue;
+  }
+
+  if (cell.s && cell.s.bold) {
+    boldedCells.push(cell.v); // Append the cell value to the array
+    // console.log(cell.s);
+    // console.log(cell.s.bold);
   }
 }
 
 console.log(boldedCells);
+
+// for (let cellAddress in sheet) {
+//   if (sheet.hasOwnProperty(cellAddress)) {
+//     // Get the cell value and style
+//     const cell = sheet[cellAddress];
+//     const value = cell.v;
+//     const style = cell.s;
+//     // console.log(cell);
+//     // console.log(value);
+//     // console.log(style);
+
+//     // Check if the cell is in the first column and has bold formatting
+//     if (cellAddress.match(/^  A\d+$/) && style && style.font && style.font.bold) {
+//       // Add the cell value to the boldedCells array
+//       // console.log(value);
+//       // console.log(style);
+//       boldedCells.push(value);
+//     }
+//   }
+// }
 
 // app.get('/api/sheetNames', (req, res) => {
 //   const workbook = XLSX.readFile(filePath);
