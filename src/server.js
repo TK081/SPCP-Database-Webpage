@@ -51,6 +51,10 @@ const getIndicators = (worksheet) => {
 
   });
 
+  if (lastCell && prevIndicatorName) {
+    boldedText[prevIndicatorName].endRow = lastCell.row;
+  }
+
   return boldedText;
 };
 
@@ -74,13 +78,19 @@ const getAreas = (worksheet, indicator) => {
 
 };
 
+/**
+ * 
+ * @param {ExcelJS.Worksheet} worksheet 
+ * @param {*} indicator 
+ * @param {*} area 
+ */
 const getIndicatorAreaCrossSection = (worksheet, indicator, area) => {
-  let categoriesRangeString = `${indicator.col}${indicator.row + 1}:${indicator.col}`;
-
+  let categories = []; 
+  
 };
 
 const readExcel = async () => {
-  // Code to loop through the first column and extract all bolded indicators
+
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
   const worksheet = workbook.getWorksheet('Peel Region Statistics'); // Replace with the name of your sheet
