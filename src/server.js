@@ -26,11 +26,11 @@ const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 
 const readExcel = async () => {
   // Code to loop through the first column and extract all bolded indicators
-  // const workbook = new ExcelJS.Workbook();
-  // await workbook.xlsx.readFile(filePath);
-  // const worksheet = workbook.getWorksheet('Canada Statistics'); // Replace 'Sheet1' with the name of your sheet
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.readFile(filePath);
+  const worksheet = workbook.getWorksheet('Peel Region Statistics'); // Replace 'Sheet1' with the name of your sheet
 
-  // const boldedText = [];
+  const boldedText = [];
 
   // worksheet.getColumn('A').eachCell((cell, rowNumber) => {
   //   if (cell.font && cell.font.bold) {
@@ -38,39 +38,82 @@ const readExcel = async () => {
   //   }
   // });
 
-  // console.log(boldedText);
+   // Find the first and last columns that contain bolded text
+  
+   let startColumn = null;
+   let endColumn = null;
+ 
+   worksheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
+     row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
+       if (cell.font && cell.font.bold) {
+         const colLetter = XLSX.utils.encode_col(colNumber);
+         if (!startColumn || colNumber < startColumn) {
+           startColumn = colNumber;
+         }
+         if (!endColumn || colNumber > endColumn) {
+           endColumn = colNumber;
+         }
+       }
+     });
+   });
+ 
+   // Add bolded text from column A
+   const columnA = [];
+   worksheet.getColumn('A').eachCell((cell, rowNumber) => {
+     if (cell.font && cell.font.bold) {
+       boldedText.push(cell.value);
+     }
+   });
+   boldedText['Column A'] = columnA;
+ 
+   // Loop through each column within the determined range
+   for (let col = startColumn; col <= endColumn; col++) {
+     const colLetter = XLSX.utils.encode_col(col);
+     if (colLetter !== 'A') {
+      const columnData = [];
+       worksheet.getColumn(colLetter).eachCell((cell, rowNumber) => {
+         if (cell.font && cell.font.bold) {
+           boldedText.push(cell.value);
+         }
+       });
+       boldedText[`Column ${colLetter}`] = columnData;
+     }
+   }
 
-  const readExcel = async () => {
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.readFile(filePath);
-    const worksheet = workbook.getWorksheet('Canada Statistics'); // Replace 'Sheet1' with the name of your sheet
+  // console.log(boldedText);
+  console.log(JSON.stringify(boldedText, null, 2));
+
+  // const readExcel = async () => {
+  //   const workbook = new ExcelJS.Workbook();
+  //   await workbook.xlsx.readFile(filePath);
+  //   const worksheet = workbook.getWorksheet('Canada Statistics'); // Replace 'Sheet1' with the name of your sheet
   
-    const boldedText = [];
+  //   const boldedText = [];
   
-    const startRow = 1; // Start from row 2 (excluding header)
-    const endRow = 225; // End at row 10
+  //   const startRow = 1; // Start from row 2 (excluding header)
+  //   const endRow = 225; // End at row 10
   
-    for (let rowNumber = startRow; rowNumber <= endRow; rowNumber++) {
-      const cell = worksheet.getCell(`A${rowNumber}`); // Assuming you're searching in the first column
-      if (cell.font && cell.font.bold) {
-        boldedText.push({
-          text: cell.value,
-          position: {
-            row: rowNumber,
-            column: 1, // Assuming you're searching in the first column
-          },
-        });
-      }
-    }
+  //   for (let rowNumber = startRow; rowNumber <= endRow; rowNumber++) {
+  //     const cell = worksheet.getCell(`A${rowNumber}`); // Assuming you're searching in the first column
+  //     if (cell.font && cell.font.bold) {
+  //       boldedText.push({
+  //         text: cell.value,
+  //         position: {
+  //           row: rowNumber,
+  //           column: 1, // Assuming you're searching in the first column
+  //         },
+  //       });
+  //     }
+  //   }
   
-    console.log(boldedText);
-  };
+    // console.log(boldedText);
+  // };
   
-  readExcel();
+  // readExcel();
 
 };
 
-// readExcel();
+ readExcel();
 
 app.get('/api/sheetNames', async (req, res) => {
   const workbook = new ExcelJS.Workbook();
