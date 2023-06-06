@@ -24,13 +24,74 @@ const path = require('path');
 const ExcelJS = require('exceljs');
 const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 
+/**
+ * 
+ * @param {ExcelJS.Worksheet} worksheet 
+ */
+const getIndicators = (worksheet) => {
+
+  const boldedText = {};
+  const prevIndicatorName = null;
+  const lastCell = null;
+
+  worksheet.getColumn('A').eachCell((cell, rowNumber) => {
+
+    if (cell.font && cell.font.bold) {
+      boldedText[cell.value.trim()] = {col: cell.col, row: cell.row};
+
+      if (prevIndicatorName) {
+        boldedText[prevIndicatorName].endRow = cell.row - 2;
+      }
+
+      prevIndicatorName = cell.value.trim();
+
+    }
+
+    lastCell = cell;
+
+  });
+
+  return boldedText;
+};
+
+/**
+ * 
+ * @param {ExcelJS.Worksheet} worksheet 
+ * @param {*} indicator 
+ */
+const getAreas = (worksheet, indicator) => {
+  const boldedAreaText = {};
+
+  let row = worksheet.getRow(indicator.row);
+  // let cells = row.getCell(2, row.actualCellCount - 1);
+  row.eachCell((cell, colNum) => {
+    if (colNum > 1){
+      boldedAreaText[cell.value.trim()] = {col: cell.col, row: cell.row};
+    }
+  });
+
+  return boldedAreaText;
+
+};
+
+const getIndicatorAreaCrossSection = (worksheet, indicator, area) => {
+  let categoriesRangeString = `${indicator.col}${indicator.row + 1}:${indicator.col}`;
+
+};
+
 const readExcel = async () => {
   // Code to loop through the first column and extract all bolded indicators
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
-  const worksheet = workbook.getWorksheet('Peel Region Statistics'); // Replace 'Sheet1' with the name of your sheet
+  const worksheet = workbook.getWorksheet('Peel Region Statistics'); // Replace with the name of your sheet
 
-  const boldedText = [];
+  const indicators = getIndicators(worksheet);
+  const areas = getAreas(worksheet, indicators['Visible minority: South Asian']); 
+  console.log(areas);
+
+  // console.log(indicators);
+
+  // const boldedText = [];
 
   // worksheet.getColumn('A').eachCell((cell, rowNumber) => {
   //   if (cell.font && cell.font.bold) {
@@ -40,56 +101,57 @@ const readExcel = async () => {
 
    // Find the first and last columns that contain bolded text
    // gives it by column number. For exmaple, A = 1, B = 2, etc..
-   let startColumn = null;
-   let endColumn = null;
+
+  //  let startColumn = null;
+  //  let endColumn = null;
  
-   worksheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
-     row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
-       if (cell.font && cell.font.bold) {
-         const colLetter = XLSX.utils.encode_col(colNumber);
-         if (!startColumn || colNumber < startColumn) {
-           startColumn = colNumber;
-         }
-         if (!endColumn || colNumber > endColumn) {
-           endColumn = colNumber;
-         }
-       }
-     });
-   });
+  //  worksheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
+  //    row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
+  //      if (cell.font && cell.font.bold) {
+  //        const colLetter = XLSX.utils.encode_col(colNumber);
+  //        if (!startColumn || colNumber < startColumn) {
+  //          startColumn = colNumber;
+  //        }
+  //        if (!endColumn || colNumber > endColumn) {
+  //          endColumn = colNumber;
+  //        }
+  //      }
+  //    });
+  //  });
  
    // Add bolded text from column A
-   console.log('Grabbing Bolded Text From Column A');
-   const columnA = [];
-   worksheet.getColumn('A').eachCell((cell, rowNumber) => {
-    if (cell.font && cell.font.bold) {
-       boldedText.push(cell.value);
-     }
-    });
+  //  console.log('Grabbing Bolded Text From Column A');
+  //  const columnA = [];
+  //  worksheet.getColumn('A').eachCell((cell, rowNumber) => {
+  //   if (cell.font && cell.font.bold) {
+  //      boldedText.push(cell.value);
+  //    }
+  //   });
 
-    if(columnA.length > 0){
-      boldedText['Column A'] = columnA;
-    }
+  //   if(columnA.length > 0){
+  //     boldedText['Column A'] = columnA;
+  //   }
  
    // Loop through each column within the determined range
-   console.log('Grabbing Bolded Text From The Rest of the Columns');
-   for (let col = startColumn; col <= endColumn; col++) {
-     const colLetter = XLSX.utils.encode_col(col);
-     if (colLetter !== 'A') {
-      const columnData = [];
-       worksheet.getColumn(colLetter).eachCell((cell, rowNumber) => {
-         if (cell.font && cell.font.bold) {
-           boldedText.push(cell.value);
-         }
-       });
-       if(columnData.length > 0){
-       boldedText[`Column ${colLetter}`] = columnData;
-      }
-     }
-   }
+  //  console.log('Grabbing Bolded Text From The Rest of the Columns');
+  //  for (let col = startColumn; col <= endColumn; col++) {
+  //    const colLetter = XLSX.utils.encode_col(col);
+  //    if (colLetter !== 'A') {
+  //     const columnData = [];
+  //      worksheet.getColumn(colLetter).eachCell((cell, rowNumber) => {
+  //        if (cell.font && cell.font.bold) {
+  //          boldedText.push(cell.value);
+  //        }
+  //      });
+  //      if(columnData.length > 0){
+  //      boldedText[`Column ${colLetter}`] = columnData;
+  //     }
+  //    }
+  //  }
 
-  // console.log(boldedText);
-  console.log('All bolded text found in the sheet:');
-  console.log(JSON.stringify(boldedText, null, 2));
+  // // console.log(boldedText);
+  // console.log('All bolded text found in the sheet:');
+  // console.log(JSON.stringify(boldedText, null, 2));
 
   // const readExcel = async () => {
   //   const workbook = new ExcelJS.Workbook();
