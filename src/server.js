@@ -39,7 +39,7 @@ const readExcel = async () => {
   // });
 
    // Find the first and last columns that contain bolded text
-  
+   // gives it by column number. For exmaple, A = 1, B = 2, etc..
    let startColumn = null;
    let endColumn = null;
  
@@ -58,15 +58,19 @@ const readExcel = async () => {
    });
  
    // Add bolded text from column A
+   console.log('Grabbing Bolded Text From Column A');
    const columnA = [];
    worksheet.getColumn('A').eachCell((cell, rowNumber) => {
      if (cell.font && cell.font.bold) {
        boldedText.push(cell.value);
      }
    });
+    if(columnA.length > 0){
    boldedText['Column A'] = columnA;
+    }
  
    // Loop through each column within the determined range
+   console.log('Grabbing Bolded Text From The Rest of the Columns');
    for (let col = startColumn; col <= endColumn; col++) {
      const colLetter = XLSX.utils.encode_col(col);
      if (colLetter !== 'A') {
@@ -76,11 +80,14 @@ const readExcel = async () => {
            boldedText.push(cell.value);
          }
        });
+       if(columnData.length > 0){
        boldedText[`Column ${colLetter}`] = columnData;
+      }
      }
    }
 
   // console.log(boldedText);
+  console.log('All bolded text found in the sheet:');
   console.log(JSON.stringify(boldedText, null, 2));
 
   // const readExcel = async () => {
