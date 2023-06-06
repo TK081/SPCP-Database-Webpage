@@ -1,10 +1,3 @@
-// app.use(express.json());
-const express = require('express');
-const cors = require('cors');
-const app = express();
-const port = 8000
-app.use(express.static('public'));
-
 /* 
 *-----------------------*
 * Packages              *
@@ -15,12 +8,19 @@ app.use(express.static('public'));
 *-----------------------*
 */
 
+// app.use(express.json());
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const port = 8000
+app.use(express.static('public'));
+
 // Enable CORS for all routes
 app.use(cors());
 
-// Code to read in excel data file using XLSX & SheetJS
+// Code to read in excel data file using ExcelJS
 const path = require('path');
-const XLSX = require('xlsx');
+// const XLSX = require('xlsx');
 const ExcelJS = require('exceljs');
 const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 
@@ -61,12 +61,13 @@ const readExcel = async () => {
    console.log('Grabbing Bolded Text From Column A');
    const columnA = [];
    worksheet.getColumn('A').eachCell((cell, rowNumber) => {
-     if (cell.font && cell.font.bold) {
+    if (cell.font && cell.font.bold) {
        boldedText.push(cell.value);
      }
-   });
+    });
+
     if(columnA.length > 0){
-   boldedText['Column A'] = columnA;
+      boldedText['Column A'] = columnA;
     }
  
    // Loop through each column within the determined range
@@ -120,75 +121,41 @@ const readExcel = async () => {
 
 };
 
- readExcel();
+readExcel();
 
-app.get('/api/sheetNames', async (req, res) => {
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.readFile(filePath);
-  const sheetNames = workbook.worksheets.map(sheet => decodeURIComponent(sheet.name));
-  res.json({ sheetNames });
-});
+// Check over for later
+// Check endpoints in both server.js & Dropdown.js
+// http://localhost:8000/api/sheet/Canada%20Statistics
+// http://localhost:8000/api/sheet/Peel%20Region%20Statistics
 
-app.get('/api/sheet/:sheetName', async (req, res) => {
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.readFile(filePath);
-  const sheetName = decodeURIComponent(req.params.sheetName);
-  const sheet = workbook.getWorksheet(sheetName);
-  console.log('Sheet Object:', sheet);
-  const jsonData = sheet.getSheetValues();
-  res.json({ sheetData: jsonData });
-});
-
-// app.get('/api/sheetNames', (req, res) => {
-//   const workbook = XLSX.readFile(filePath);
-//   const sheetNames = workbook.SheetNames;
+// app.get('/api/sheetNames', async (req, res) => {
+//   const workbook = new ExcelJS.Workbook();
+//   await workbook.xlsx.readFile(filePath);
+//   const sheetNames = workbook.worksheets.map(sheet => decodeURIComponent(sheet.name));
 //   res.json({ sheetNames });
 // });
 
-// ExcelJS Get Request for sheetNames
-// app.get('/api/sheetNames', (req, res) => {
+// app.get('/api/sheet/:sheetName', async (req, res) => {
 //   const workbook = new ExcelJS.Workbook();
-//   workbook.xlsx.readFile(filePath)
-//     .then(() => {
-//       const sheetNames = workbook.sheetNames;
-//       res.json({ sheetNames });
-//     })
-//     .catch((error) => {
-//       res.status(500).json({ error: 'Failed to read the file' });
-//     });
-// });
-
-
-// Check endpoint in both server.js & Dropdown.js
-// http://localhost:8000/api/sheet/Canada%20Statistics
-// http://localhost:8000/api/sheet/Peel%20Region%20Statistics
-// app.get('/api/sheet/:sheetName',(req, res) => {
-
-//   const workbook = XLSX.readFile(filePath);
+//   await workbook.xlsx.readFile(filePath);
 //   const sheetName = decodeURIComponent(req.params.sheetName);
-//   const sheet = workbook.Sheets[sheetName];
+//   const sheet = workbook.getWorksheet(sheetName);
 //   console.log('Sheet Object:', sheet);
-//   const jsonData = XLSX.utils.sheet_to_json(sheet);
+//   const jsonData = sheet.getSheetValues();
 //   res.json({ sheetData: jsonData });
-
-  // const sheetName = workbook.SheetNames;
-  // res.json({sheetName});
-  //const worksheet = workbook.Sheets[sheetnames];
-  //const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames]);
-  
 // });
 
 // http://localhost:8000/api/search?query=helloworld
-app.get('/api/search', (req, res) => {
+// app.get('/api/search', (req, res) => {
 
-  //res.send('Hello from the search endpoint');
-  console.log('Received request at /api/search');
-  const query = req.query.query;
-  // Implement our own search logic 
-  console.log('Query:',query);
-  res.json(query)
+//   //res.send('Hello from the search endpoint');
+//   console.log('Received request at /api/search');
+//   const query = req.query.query;
+//   // Implement our own search logic 
+//   console.log('Query:',query);
+//   res.json(query)
 
-});
+// });
 
 app.listen(port, () => {
   console.log('Server is running on port 8000');
