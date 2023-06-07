@@ -31,13 +31,13 @@ const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 const getIndicators = (worksheet) => {
 
   const boldedText = {};
-  const prevIndicatorName = null;
-  const lastCell = null;
+  let prevIndicatorName = null;
+  let lastCell = null;
 
   worksheet.getColumn('A').eachCell((cell, rowNumber) => {
 
     if (cell.font && cell.font.bold) {
-      boldedText[cell.value.trim()] = {col: cell.col, row: cell.row};
+      boldedText[cell.value.trim()] = {col: cell.address[0], row: cell.row};
 
       if (prevIndicatorName) {
         boldedText[prevIndicatorName].endRow = cell.row - 2;
@@ -70,7 +70,7 @@ const getAreas = (worksheet, indicator) => {
   // let cells = row.getCell(2, row.actualCellCount - 1);
   row.eachCell((cell, colNum) => {
     if (colNum > 1){
-      boldedAreaText[cell.value.trim()] = {col: cell.col, row: cell.row};
+      boldedAreaText[cell.value.trim()] = {col: cell.address[0], row: cell.row};
     }
   });
 
@@ -81,12 +81,28 @@ const getAreas = (worksheet, indicator) => {
 /**
  * 
  * @param {ExcelJS.Worksheet} worksheet 
- * @param {*} indicator 
- * @param {*} area 
+ * @param {*} indicatorName
+ * @param {*} indicatorLocation 
+ * @param {*} areaName
+ * @param {*} areaLocation 
  */
-const getIndicatorAreaCrossSection = (worksheet, indicator, area) => {
+const getIndicatorAreaCrossSection = (worksheet, indicatorName, indicatorLocation, areaName, areaLocation) => {
+
   let categories = []; 
-  
+  let areasValues = [];
+
+  for (let row = indicatorLocation.row + 1; row <= indicatorLocation.endRow; row++) {
+    let categoryCell = worksheet.getCell(`${indicatorLocation.col}${row}`);
+    let areaValueCell = worksheet.getCell(`${areaLocation.col}${row}`);
+    categories.push(`${categoryCell.value}`.trim());
+    let areaValue = `${areaValueCell.toString()}`.trim();
+    if (areaValue.length == 0) {
+      areaValue = '0';
+    }
+    areasValues.push(areaValue);
+  }
+
+  return {indicator:indicatorName, area:areaName, categories, areasValues:areasValues};
 };
 
 const readExcel = async () => {
@@ -95,101 +111,21 @@ const readExcel = async () => {
   await workbook.xlsx.readFile(filePath);
   const worksheet = workbook.getWorksheet('Peel Region Statistics'); // Replace with the name of your sheet
 
-  const indicators = getIndicators(worksheet);
-  const areas = getAreas(worksheet, indicators['Visible minority: South Asian']); 
-  console.log(areas);
+  let indicators = getIndicators(worksheet);
+  const result = {};
+  Object.keys(indicators).forEach((indicatorName) => {
+    let indicator = indicators[indicatorName];
+    let areas = getAreas(worksheet, indicator); 
+    Object.keys(areas).forEach((areaName) => {
+      const crossSection = getIndicatorAreaCrossSection(worksheet, indicatorName, indicator, areaName, areas[areaName]);
+      result[`${indicatorName}/${areaName}`] = crossSection;
+    });
+  });
 
-  // console.log(indicators);
+  let searchString = 'Martial Status/Brampton';
+  console.log(result[searchString]);
 
-  // const boldedText = [];
-
-  // worksheet.getColumn('A').eachCell((cell, rowNumber) => {
-  //   if (cell.font && cell.font.bold) {
-  //     boldedText.push(cell.value);
-  //   }
-  // });
-
-   // Find the first and last columns that contain bolded text
-   // gives it by column number. For exmaple, A = 1, B = 2, etc..
-
-  //  let startColumn = null;
-  //  let endColumn = null;
- 
-  //  worksheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
-  //    row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
-  //      if (cell.font && cell.font.bold) {
-  //        const colLetter = XLSX.utils.encode_col(colNumber);
-  //        if (!startColumn || colNumber < startColumn) {
-  //          startColumn = colNumber;
-  //        }
-  //        if (!endColumn || colNumber > endColumn) {
-  //          endColumn = colNumber;
-  //        }
-  //      }
-  //    });
-  //  });
- 
-   // Add bolded text from column A
-  //  console.log('Grabbing Bolded Text From Column A');
-  //  const columnA = [];
-  //  worksheet.getColumn('A').eachCell((cell, rowNumber) => {
-  //   if (cell.font && cell.font.bold) {
-  //      boldedText.push(cell.value);
-  //    }
-  //   });
-
-  //   if(columnA.length > 0){
-  //     boldedText['Column A'] = columnA;
-  //   }
- 
-   // Loop through each column within the determined range
-  //  console.log('Grabbing Bolded Text From The Rest of the Columns');
-  //  for (let col = startColumn; col <= endColumn; col++) {
-  //    const colLetter = XLSX.utils.encode_col(col);
-  //    if (colLetter !== 'A') {
-  //     const columnData = [];
-  //      worksheet.getColumn(colLetter).eachCell((cell, rowNumber) => {
-  //        if (cell.font && cell.font.bold) {
-  //          boldedText.push(cell.value);
-  //        }
-  //      });
-  //      if(columnData.length > 0){
-  //      boldedText[`Column ${colLetter}`] = columnData;
-  //     }
-  //    }
-  //  }
-
-  // // console.log(boldedText);
-  // console.log('All bolded text found in the sheet:');
-  // console.log(JSON.stringify(boldedText, null, 2));
-
-  // const readExcel = async () => {
-  //   const workbook = new ExcelJS.Workbook();
-  //   await workbook.xlsx.readFile(filePath);
-  //   const worksheet = workbook.getWorksheet('Canada Statistics'); // Replace 'Sheet1' with the name of your sheet
-  
-  //   const boldedText = [];
-  
-  //   const startRow = 1; // Start from row 2 (excluding header)
-  //   const endRow = 225; // End at row 10
-  
-  //   for (let rowNumber = startRow; rowNumber <= endRow; rowNumber++) {
-  //     const cell = worksheet.getCell(`A${rowNumber}`); // Assuming you're searching in the first column
-  //     if (cell.font && cell.font.bold) {
-  //       boldedText.push({
-  //         text: cell.value,
-  //         position: {
-  //           row: rowNumber,
-  //           column: 1, // Assuming you're searching in the first column
-  //         },
-  //       });
-  //     }
-  //   }
-  
-    // console.log(boldedText);
-  // };
-  
-  // readExcel();
+  return result;
 
 };
 
