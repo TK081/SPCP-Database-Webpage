@@ -122,6 +122,7 @@ const readExcel = async () => {
     });
   });
 
+  // Testing Case
   let searchString = 'Martial Status/Brampton';
   console.log(result[searchString]);
 
