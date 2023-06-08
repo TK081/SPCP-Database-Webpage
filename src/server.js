@@ -123,7 +123,7 @@ const readExcel = async () => {
   });
 
   // Testing Case
-  let searchString = 'Martial Status/Brampton';
+  let searchString = 'Gender/Canada';
   console.log(result[searchString]);
 
   return result;
