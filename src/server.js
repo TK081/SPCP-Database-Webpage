@@ -109,7 +109,7 @@ const readExcel = async (searchString) => {
 
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
-  const worksheet = workbook.getWorksheet('Canada Statistics'); // Replace with the name of your sheet
+  const worksheet = workbook.getWorksheet('Peel Region Statistics'); // Replace with the name of your sheet
 
   let indicators = getIndicators(worksheet);
   const result = {};
@@ -131,6 +131,49 @@ const readExcel = async (searchString) => {
 };
 
 readExcel();
+
+app.get('/autocomplete', async (req, res) => {
+const workbook = new ExcelJS.Workbook();
+await workbook.xlsx.readFile(filePath);
+const worksheet = workbook.getWorksheet('Peel Region Statistics'); // Replace with the name of your sheet
+
+const indicatorboldedText = []; //an array of the indicator names
+const areaboldedText = []; //an array of the area location
+
+//grabs indicator names from column A and stores in the indicator array
+worksheet.getColumn('A').eachCell((cell, rowNumber) => {
+  if (cell.font && cell.font.bold) {
+    indicatorboldedText.push(cell.value);
+  }
+});
+
+//grabs area location from column A and stores in the area array
+worksheet.getRow(1).eachCell((cell, columnNumber) => {
+  if (columnNumber > 1 && cell.font && cell.font.bold) {
+    areaboldedText.push(cell.value);
+  }
+});
+
+const boldedText = [];
+
+//combines the area and indicator array into one array
+// and stores each value as indicatorName/areaLocation
+indicatorboldedText.forEach((indicator) => {
+  areaboldedText.forEach((area) => {
+    boldedText.push(`${indicator}/${area}`);
+  });
+});
+  const term = req.query.term; //Takes whatever term is being typed
+
+  //filters through the array and matches with term
+  const filteredSuggestions = boldedText.filter((text) =>
+  text.toLowerCase().includes(term.toLowerCase())
+);
+  res.json(filteredSuggestions);
+});
+
+
+// console.log(boldedText);
 
 // Check over for later
 // Check endpoints in both server.js & Dropdown.js

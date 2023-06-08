@@ -5,11 +5,24 @@ import axios from 'axios';
 const SearchBar = () => { 
 
     const [query , setSearchQuery] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
     // const [searchResults, setSearchResults] = useState('');
 
-    const handleSearchQuery = (event) => {
+    const handleSearchQuery = async (event) => {
+        const value = event.target.value;
         setSearchQuery(event.target.value);
+        if (value === '') {
+            setSuggestions([]);
+        } else {
+            const response = await axios.get(`http://localhost:8000/autocomplete?term=${value}`);
+            setSuggestions(response.data);
+        }
     };
+
+    const handleSuggestionClick = (suggestions) => {
+        setSearchQuery(suggestions);
+        setSuggestions([]);
+      };
 
     const handleSearchClick = (event) => {
         //localStorage.setItem('searchQuery', searchQuery);
@@ -47,6 +60,11 @@ const SearchBar = () => {
             <div>
                 {setSearchQuery}
             </div>
+            <ul>
+        {suggestions && suggestions.map((suggestion, index) => (
+          <li key={index} onClick={() => handleSuggestionClick(suggestion)}>{suggestion}</li>
+        ))}
+      </ul>
         </div> 
 
         </form> 
