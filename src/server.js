@@ -105,11 +105,11 @@ const getIndicatorAreaCrossSection = (worksheet, indicatorName, indicatorLocatio
   return {indicator:indicatorName, area:areaName, categories, areasValues:areasValues};
 };
 
-const readExcel = async () => {
+const readExcel = async (searchString) => {
 
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
-  const worksheet = workbook.getWorksheet('Peel Region Statistics'); // Replace with the name of your sheet
+  const worksheet = workbook.getWorksheet('Canada Statistics'); // Replace with the name of your sheet
 
   let indicators = getIndicators(worksheet);
   const result = {};
@@ -123,8 +123,8 @@ const readExcel = async () => {
   });
 
   // Testing Case
-  let searchString = 'Martial Status/Brampton';
-  console.log(result[searchString]);
+    // let searchString = 'Martial Status/Brampton';
+    console.log(result[searchString]); 
 
   return result;
 
@@ -155,16 +155,17 @@ readExcel();
 // });
 
 // http://localhost:8000/api/search?query=helloworld
-// app.get('/api/search', (req, res) => {
+app.get('/api/search', (req, res) => {
 
-//   //res.send('Hello from the search endpoint');
-//   console.log('Received request at /api/search');
-//   const query = req.query.query;
-//   // Implement our own search logic 
-//   console.log('Query:',query);
-//   res.json(query)
+  //res.send('Hello from the search endpoint');
+  console.log('Received request at /api/search');
+  const query = req.query.query;
+  readExcel(query);// Implement our own search logic 
+  console.log('Query:',query);
+  res.json(query)
 
-// });
+});
+
 
 app.listen(port, () => {
   console.log('Server is running on port 8000');
