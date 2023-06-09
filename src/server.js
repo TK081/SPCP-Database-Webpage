@@ -166,7 +166,7 @@ const readSuggestion = async () => {
 
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
-  const worksheet = workbook.getWorksheet(sheet); // Replace with the name of your sheet
+  const worksheet = workbook.getWorksheet('Peel Region Statistics'); // Replace with the name of your sheet
 
   const indicatorboldedText = []; //an array of the indicator names
   const areaboldedText = []; //an array of the area location
