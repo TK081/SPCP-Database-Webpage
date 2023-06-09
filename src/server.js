@@ -35,7 +35,7 @@ app.get('/api/sheetNames', async (req, res) => {
   res.json({ sheetNames });
 });
 
-let sheet = null; 
+// let sheet = null; 
 
 app.get('/api/sheet/:sheetName', async (req, res) => {
   const workbook = new ExcelJS.Workbook();
@@ -137,7 +137,7 @@ const readExcel = async (searchString) => {
 
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
-  const worksheet = workbook.getWorksheet(sheet); // Replace with the name of your sheet
+  const worksheet = workbook.getWorksheet('Canada Statistics'); // Replace with the name of your sheet
 
   let indicators = getIndicators(worksheet);
   const result = {};
@@ -166,7 +166,7 @@ const readSuggestion = async () => {
 
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
-  const worksheet = workbook.getWorksheet('Peel Region Statistics'); // Replace with the name of your sheet
+  const worksheet = workbook.getWorksheet('Canada Statistics'); // Replace with the name of your sheet
 
   const indicatorboldedText = []; //an array of the indicator names
   const areaboldedText = []; //an array of the area location
@@ -223,10 +223,10 @@ app.get('/api/search', (req, res) => {
 
   //res.send('Hello from the search endpoint');
   console.log('Received request at /api/search');
-  if (!sheet) {
-    res.status(400).json({ error: 'No sheet loaded' });
-    return;
-  }
+  // if (!sheet) {
+  //   res.status(400).json({ error: 'No sheet loaded' });
+  //   return;
+  // }
 
   const query = req.query.query;
   readExcel(query);
