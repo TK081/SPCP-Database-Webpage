@@ -132,8 +132,9 @@ const readExcel = async (searchString) => {
 
 readExcel();
 
-app.get('/autocomplete', async (req, res) => {
-const workbook = new ExcelJS.Workbook();
+const readSuggestion = async () => {
+
+  const workbook = new ExcelJS.Workbook();
 await workbook.xlsx.readFile(filePath);
 const worksheet = workbook.getWorksheet('Peel Region Statistics'); // Replace with the name of your sheet
 
@@ -163,10 +164,25 @@ indicatorboldedText.forEach((indicator) => {
     boldedText.push(`${indicator}/${area}`);
   });
 });
+
+return boldedText;
+}
+
+let suggestionData = null;
+
+const loadSuggestionData = async () => {
+  suggestionData =  await readSuggestion();
+}
+
+app.get('/autocomplete', async (req, res) => {
   const term = req.query.term; //Takes whatever term is being typed
 
+  if (!suggestionData){
+    await loadSuggestionData ();
+  }
+
   //filters through the array and matches with term
-  const filteredSuggestions = boldedText.filter((text) =>
+  const filteredSuggestions = suggestionData.filter((text) =>
   text.toLowerCase().includes(term.toLowerCase())
 );
   res.json(filteredSuggestions);
