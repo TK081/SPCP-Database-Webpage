@@ -21,31 +21,31 @@ app.use(cors());
 // Code to read in excel data file using ExcelJS
 const path = require('path');
 const ExcelJS = require('exceljs');
-const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv21.xlsx');
+const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
 
 // Check over for later
 // Check endpoints in both server.js & Dropdown.js
 // http://localhost:8000/api/sheet/Canada%20Statistics
 // http://localhost:8000/api/sheet/Peel%20Region%20Statistics
 
-app.get('/api/sheetNames', async (req, res) => {
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.readFile(filePath);
-  const sheetNames = workbook.worksheets.map(sheet => decodeURIComponent(sheet.name));
-  res.json({ sheetNames });
-});
+// app.get('/api/sheetNames', async (req, res) => {
+//   const workbook = new ExcelJS.Workbook();
+//   await workbook.xlsx.readFile(filePath);
+//   const sheetNames = workbook.worksheets.map(sheet => decodeURIComponent(sheet.name));
+//   res.json({ sheetNames });
+// });
 
-// let sheet = null; 
+// // let sheet = null; 
 
-app.get('/api/sheet/:sheetName', async (req, res) => {
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.readFile(filePath);
-  const sheetName = decodeURIComponent(req.params.sheetName);
-  const sheet = workbook.getWorksheet(sheetName);
-  console.log('Sheet Object:', sheet);
-  const jsonData = sheet.getSheetValues();
-  res.json({ sheetData: jsonData });
-});
+// app.get('/api/sheet/:sheetName', async (req, res) => {
+//   const workbook = new ExcelJS.Workbook();
+//   await workbook.xlsx.readFile(filePath);
+//   const sheetName = decodeURIComponent(req.params.sheetName);
+//   const sheet = workbook.getWorksheet(sheetName);
+//   console.log('Sheet Object:', sheet);
+//   const jsonData = sheet.getSheetValues();
+//   res.json({ sheetData: jsonData });
+// });
 
 /**
  * 
@@ -138,6 +138,7 @@ const readExcel = async (searchString) => {
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
   const worksheet = workbook.getWorksheet('Canada Statistics'); // Replace with the name of your sheet
+  console.log(worksheet);
 
   let indicators = getIndicators(worksheet);
   const result = {};
@@ -157,6 +158,8 @@ const readExcel = async (searchString) => {
   return result;
 
 };
+
+readExcel();
 
 /**
  * 
@@ -209,7 +212,7 @@ app.get('/autocomplete', async (req, res) => {
   const term = req.query.term; //Takes whatever term is being typed
 
   if (!suggestionData){
-    await loadSuggestionData ();
+    await loadSuggestionData();
   }
 
   //filters through the array and matches with term
