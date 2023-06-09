@@ -48,8 +48,9 @@ const SearchBar = () => {
     };
 
     return ( 
-        <form onSubmit={handleSearchClick} >
         <div class = "search"> 
+        <form onSubmit={handleSearchClick} >
+
             <input className="search-bar"
                 type="text"
                 value={query}
@@ -60,14 +61,17 @@ const SearchBar = () => {
             <div>
                 {setSearchQuery}
             </div>
+
+            <div className = "suggest-box">
             <ul>
         {suggestions && suggestions.map((suggestion, index) => (
           <li key={index} onClick={() => handleSuggestionClick(suggestion)}>{suggestion}</li>
         ))}
       </ul>
-        </div> 
+      </div>
 
         </form> 
+        </div> 
     ); 
 }; 
 
