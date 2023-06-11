@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Dropdown = () => {
+const Dropdown = ({selectedSheetChanged}) => {
   const [sheetNames, setSheetNames] = useState([]);
   const [selectedSheet, setSelectedSheet] = useState('');
   const [showAlert, setShowAlert] = useState(false);
@@ -10,6 +10,7 @@ const Dropdown = () => {
 
   const handleSheetSelect = (event) => {
     setSelectedSheet(event.target.value);
+    selectedSheetChanged(event.target.value);
   };
 
   const Alert = ({ message ,type}) => {

@@ -31,15 +31,18 @@ function App() {
 
   // All HTML elements and components as they appear
 
+  const [selectedSheet, setSelectedSheet] = useState('');
+
+
   const popupRef = useRef(null);
 
   function openPopup(){
-popupRef.current.classList.add("open-popup")
+    popupRef.current.classList.add("open-popup")
   }
 
   function closePopup(){
     popupRef.current.classList.remove("open-popup")
-      }
+  }
 
   return (
 
@@ -64,7 +67,7 @@ popupRef.current.classList.add("open-popup")
       </div>
 
       {/* // Dropdown Menu Component */}
-       <Dropdown/>
+        <Dropdown selectedSheetChanged={setSelectedSheet}/>
 
       {/* // Logo */}
       <img className="logo" src={image} alt="SPCP Logo" />
@@ -77,7 +80,7 @@ popupRef.current.classList.add("open-popup")
       </div>
 
       {/* // Search Bar Component */}
-        <SearchBar/>
+        <SearchBar sheet={selectedSheet}/>
 
       {/* // Help & Download Buttons */}
       <div>

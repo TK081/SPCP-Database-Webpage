@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import axios from 'axios';
 
-const SearchBar = () => { 
+const SearchBar = ({sheet}) => { 
 
     const [query , setSearchQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
@@ -14,7 +14,7 @@ const SearchBar = () => {
         if (value === '') {
             setSuggestions([]);
         } else {
-            const response = await axios.get(`http://localhost:8000/autocomplete?term=${value}`);
+            const response = await axios.get(`http://localhost:8000/autocomplete?term=${value}&sheet=${encodeURIComponent(sheet)}`);
             setSuggestions(response.data);
         }
     };
@@ -25,25 +25,15 @@ const SearchBar = () => {
       };
 
     const handleSearchClick = (event) => {
-        //localStorage.setItem('searchQuery', searchQuery);
         event.preventDefault();
-        axios.get('http://localhost:8000/api/search', {params: {query}})
+        axios.get('http://localhost:8000/api/search', {params: {query, sheet}})
         .then((response) => {
-            // setSearchQuery(response.data.query)
             console.log('Search Results:', response.data); 
         })
 
         .catch((error) => {
             console.error('Error:', error);
         });
-    
-        // try {
-        //     const response = await axios.get(`/search?query=${searchQuery}`);
-        //     // Process the response data as needed
-        //     console.log(response.data);
-        // } catch (error) {
-        //     console.error(error);
-        // }
         
     };
 

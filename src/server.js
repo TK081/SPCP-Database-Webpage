@@ -3,7 +3,7 @@
 * Packages              *
 *                       *
 * npm install axios     *
-* npm install xlsx      *
+* npm install exceljs   *
 * npm install cors      *
 *-----------------------*
 */
@@ -21,31 +21,30 @@ app.use(cors());
 // Code to read in excel data file using ExcelJS
 const path = require('path');
 const ExcelJS = require('exceljs');
-const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv2.xlsx');
+const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv21.xlsx');
+const cache = {excel: {}, suggestions: {}};
 
 // Check over for later
 // Check endpoints in both server.js & Dropdown.js
 // http://localhost:8000/api/sheet/Canada%20Statistics
 // http://localhost:8000/api/sheet/Peel%20Region%20Statistics
 
-// app.get('/api/sheetNames', async (req, res) => {
-//   const workbook = new ExcelJS.Workbook();
-//   await workbook.xlsx.readFile(filePath);
-//   const sheetNames = workbook.worksheets.map(sheet => decodeURIComponent(sheet.name));
-//   res.json({ sheetNames });
-// });
+app.get('/api/sheetNames', async (req, res) => {
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.readFile(filePath);
+  const sheetNames = workbook.worksheets.map(sheet => decodeURIComponent(sheet.name));
+  res.json({ sheetNames });
+});
 
-// // let sheet = null; 
-
-// app.get('/api/sheet/:sheetName', async (req, res) => {
-//   const workbook = new ExcelJS.Workbook();
-//   await workbook.xlsx.readFile(filePath);
-//   const sheetName = decodeURIComponent(req.params.sheetName);
-//   const sheet = workbook.getWorksheet(sheetName);
-//   console.log('Sheet Object:', sheet);
-//   const jsonData = sheet.getSheetValues();
-//   res.json({ sheetData: jsonData });
-// });
+app.get('/api/sheet/:sheetName', async (req, res) => {
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.readFile(filePath);
+  const sheetName = decodeURIComponent(req.params.sheetName);
+  const sheet = workbook.getWorksheet(sheetName);
+  // console.log('Sheet Object:', sheet);
+  const jsonData = sheet.getSheetValues();
+  res.json({ sheetData: jsonData });
+});
 
 /**
  * 
@@ -133,14 +132,15 @@ const getIndicatorAreaCrossSection = (worksheet, indicatorName, indicatorLocatio
  * @param {*} searchString 
  * @returns 
  */
-const readExcel = async (searchString) => {
+const readExcel = async (excelSheet) => {
 
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
-  const worksheet = workbook.getWorksheet('Canada Statistics'); // Replace with the name of your sheet
-  console.log(worksheet);
+  const worksheet = workbook.getWorksheet(excelSheet); // Replace with the name of your sheet
+  // console.log(worksheet);
 
   let indicators = getIndicators(worksheet);
+  // console.log(indicators);
   const result = {};
   Object.keys(indicators).forEach((indicatorName) => {
     let indicator = indicators[indicatorName];
@@ -152,24 +152,50 @@ const readExcel = async (searchString) => {
   });
 
   // Testing Case
-    // let searchString = 'Martial Status/Brampton';
-    console.log(result[searchString]); 
+    // let searchString = 'Gender/Ontario';
+    // console.log(result[searchString]); 
 
   return result;
 
 };
 
-readExcel();
+/**
+ * 
+ * @param {*} excelSheet 
+ * @returns 
+ */
+const readExcelCache = async (excelSheet) => {
+  if (cache['excel'][excelSheet]) {
+    return cache['excel'][excelSheet];
+  };
+
+  cache['excel'][excelSheet] = readExcel(excelSheet);
+  return cache['excel'][excelSheet];
+};
+
+/**
+ * 
+ * @param {*} excelSheet 
+ * @returns 
+ */
+const readSuggestionCache = async (excelSheet) => {
+  if (cache['suggestions'][excelSheet]) {
+    return cache['suggestions'][excelSheet];
+  };
+
+  cache['suggestions'][excelSheet] = readSuggestion(excelSheet);
+  return cache['suggestions'][excelSheet];
+};
 
 /**
  * 
  * @returns 
  */
-const readSuggestion = async () => {
+const readSuggestion = async (excelSheet) => {
 
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
-  const worksheet = workbook.getWorksheet('Canada Statistics'); // Replace with the name of your sheet
+  const worksheet = workbook.getWorksheet(excelSheet); // Replace with the name of your sheet
 
   const indicatorboldedText = []; //an array of the indicator names
   const areaboldedText = []; //an array of the area location
@@ -203,38 +229,40 @@ const readSuggestion = async () => {
 
 let suggestionData = null;
 
-const loadSuggestionData = async () => {
-
-  suggestionData =  await readSuggestion();
+/**
+ * 
+ * @param {*} excelSheet 
+ */
+const loadSuggestionData = async (excelSheet) => {
+  suggestionData = await readSuggestion(excelSheet);
 }
 
 app.get('/autocomplete', async (req, res) => {
-  const term = req.query.term; //Takes whatever term is being typed
+  const term = req.query.term; // Takes whatever term is being typed
+  const sheet = req.query.sheet;
 
-  if (!suggestionData){
-    await loadSuggestionData();
-  }
+  let newSuggestionData = await readSuggestionCache(sheet);
 
-  //filters through the array and matches with term
-  const filteredSuggestions = suggestionData.filter((text) =>
-  text.toLowerCase().includes(term.toLowerCase())
-);
+  // filters through the array and matches with term
+  const filteredSuggestions = newSuggestionData.filter((text) =>
+  text.toLowerCase().includes(term.toLowerCase()));
   res.json(filteredSuggestions);
 });
 
-app.get('/api/search', (req, res) => {
+app.get('/api/search', async (req, res) => {
 
   //res.send('Hello from the search endpoint');
-  console.log('Received request at /api/search');
+  // console.log('Received request at /api/search');
   // if (!sheet) {
   //   res.status(400).json({ error: 'No sheet loaded' });
   //   return;
   // }
 
-  const query = req.query.query;
-  readExcel(query);
-  console.log('Query:',query);
-  res.json(query);
+  const query = req.query.query.trim();
+  const sheet = req.query.sheet.trim();
+  const result = await readExcelCache(sheet);
+  res.json(result[query]);
+  console.log(result[query]);
 
 });
 
