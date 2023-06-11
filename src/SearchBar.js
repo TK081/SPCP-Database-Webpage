@@ -34,7 +34,6 @@ const SearchBar = ({sheet}) => {
         .catch((error) => {
             console.error('Error:', error);
         });
-        
     };
 
     return ( 
