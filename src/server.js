@@ -21,6 +21,7 @@ app.use(cors());
 // Code to read in excel data file using ExcelJS
 const path = require('path');
 const ExcelJS = require('exceljs');
+const chartJS = require('chart.js');
 const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv21.xlsx');
 const cache = {excel: {}, suggestions: {}};
 
@@ -251,19 +252,11 @@ app.get('/autocomplete', async (req, res) => {
 
 app.get('/api/search', async (req, res) => {
 
-  //res.send('Hello from the search endpoint');
-  // console.log('Received request at /api/search');
-  // if (!sheet) {
-  //   res.status(400).json({ error: 'No sheet loaded' });
-  //   return;
-  // }
-
   const query = req.query.query.trim();
   const sheet = req.query.sheet.trim();
   const result = await readExcelCache(sheet);
   res.json(result[query]);
-  console.log(result[query]);
-
+  // console.log(result[query]);
 });
 
 // app.get('/output', (req, res) => {

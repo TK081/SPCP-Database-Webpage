@@ -19,16 +19,6 @@ import 'typeface-montserrat';
 
 function App() {
 
-  // Code for help button pop up message
-  // const [showPopup, setShowPopup] = useState('');
-
-  // const handleHelp = () => {
-  //   setShowPopup(true);
-  //   setTimeout(() => {
-  //     setShowPopup(false);
-  //   }, 5000); // Hide the popup after 5 seconds
-  // };
-
   // All HTML elements and components as they appear
 
   const [selectedSheet, setSelectedSheet] = useState('');
@@ -88,12 +78,11 @@ function App() {
         <div className="popup" ref={popupRef} id="popup">
           <img src={imagetwo} />
           <h2>Help</h2>
-          <p>Search in this format: "Indicator/Area</p>
+          <p>Search in this format: "Indicator/Area"</p>
           <button type="button" onClick={closePopup}>OK</button>
         </div>
         <button className="button"><FaDownload/></button>
       </div>
-
     </div>
   );
 }

@@ -18,12 +18,6 @@ const Dropdown = ({selectedSheetChanged}) => {
   };
 
   useEffect(() => {
-
-//     axios.get('http://localhost:8000/api/sheet', {
-//   params: {
-//     sheetName: 'Peel Region Statistics' // Use the correct sheet name from your Excel file
-//   }
-// })
     axios.get('http://localhost:8000/api/sheetNames')
     .then((response) => {
       console.log(response);
@@ -38,7 +32,6 @@ const Dropdown = ({selectedSheetChanged}) => {
   const handleSheetLoad = () => {
     if (sheetNames.includes(selectedSheet)) {
       // The selected sheet is valid, load it
-      // console.log('This is the selected sheet:', selectedSheet);
       axios.get(`http://localhost:8000/api/sheet/${encodeURIComponent(selectedSheet)}`, {
         params: {
           sheetName: selectedSheet
