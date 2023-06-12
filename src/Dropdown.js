@@ -40,7 +40,7 @@ const Dropdown = ({selectedSheetChanged}) => {
         .then((response) => {
           // Handle the response with the selected sheet data in the backend
           setShowAlert(true);
-          setAlertMessage('Data Loaded successfully!');
+          setAlertMessage(`${selectedSheet} Loaded successfully!`);
           setAlertType('success');
           console.log('Selected Sheet Data:', response.data.sheetData);
         })
