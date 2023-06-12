@@ -84,6 +84,10 @@ function App() {
         </div>
         <button className="button"><FaDownload/></button>
       </div>
+
+    {/* // Data Output Component */}
+      
+
       {/*Footer*/}
      <footer className="footer">
         <div className="container">

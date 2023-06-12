@@ -251,7 +251,6 @@ app.get('/autocomplete', async (req, res) => {
 });
 
 app.get('/api/search', async (req, res) => {
-
   const query = req.query.query.trim();
   const sheet = req.query.sheet.trim();
   const result = await readExcelCache(sheet);
@@ -259,8 +258,8 @@ app.get('/api/search', async (req, res) => {
   console.log(result[query]);
 });
 
-// app.get('/output', (req, res) => {
-
+// app.get('/api/output', (req, res) => {
+  
 // });
 
 app.listen(port, () => {
