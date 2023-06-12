@@ -2,7 +2,7 @@ import React, { useState , useRef} from "react";
 import './App.css';
 import image from './images/spcp.jpg';
 import imagetwo from './images/questionmark.png'
-import {FaQuestion , FaDownload} from 'react-icons/fa';
+import {FaQuestion , FaDownload, FaFacebook, FaInstagram, FaYoutube} from 'react-icons/fa';
 import SearchBar from "./SearchBar";
 import Dropdown from "./Dropdown";
 // import SearchResult from "./SearchResult";
@@ -84,6 +84,34 @@ function App() {
         </div>
         <button className="button"><FaDownload/></button>
       </div>
+      {/*Footer*/}
+     <footer className="footer">
+        <div className="container">
+         <div className="row">
+              {/* Column 1 */}
+    {/* <div className="Logo">
+      <h3>LOGO</h3>
+    </div> */}
+    {/* Column 2 */}
+    {/* <div classNAme="Links">
+      <h3>Useful Link</h3>
+      <a href="#">SPCP Website</a>
+      <a href="#">Portraits of Ontario</a>
+    </div> */}
+    {/* Column 3 */}
+    {/* <div className="socials">
+      <h3>Socials</h3>
+      <a href=""><i><FaFacebook/></i></a>
+      <a href=""><i><FaInstagram/></i></a>
+      <a href=""><i><FaYoutube/></i></a>
+    </div> */}
+
+
+          </div> 
+       
+      </div> 
+      
+      </footer>
     </div>
   );
 }
