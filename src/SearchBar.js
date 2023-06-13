@@ -7,6 +7,8 @@ const SearchBar = ({sheet}) => {
     const [query , setSearchQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     // const [searchResults, setSearchResults] = useState('');
+    const [data, setData] = useState([]);
+
 
     const handleSearchQuery = async (event) => {
         const value = event.target.value;
@@ -35,6 +37,16 @@ const SearchBar = ({sheet}) => {
             console.error('Error:', error);
         });
     };
+
+    const DataComponent = () => {      
+        useEffect(() => {
+          fetch('/api/search')
+            .then((response) => response.json())
+            .then((jsonData) => setData(jsonData))
+            .catch((error) => {
+              // Handle any errors
+            });
+        }, []);
 
     return ( 
         <div class = "search"> 
