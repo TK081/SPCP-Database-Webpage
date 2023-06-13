@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import axios from 'axios';
 
@@ -40,13 +40,14 @@ const SearchBar = ({sheet}) => {
 
     const DataComponent = () => {      
         useEffect(() => {
-          fetch('/api/search')
+            axios.get('http://localhost:8000/api/search', {params: {data}})
             .then((response) => response.json())
             .then((jsonData) => setData(jsonData))
             .catch((error) => {
               // Handle any errors
             });
         }, []);
+    };
 
     return ( 
         <div class = "search"> 
@@ -70,8 +71,26 @@ const SearchBar = ({sheet}) => {
         ))}
       </ul>
       </div>
-
         </form> 
+            {DataComponent}
+        <table>
+        <thead>
+          <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            {/* Add more column headers if needed */}
+          </tr>
+        </thead>
+        <tbody>
+          {data.map(item => (
+            <tr key={item.id}>
+              <td>{item.column1}</td>
+              <td>{item.column2}</td>
+              {/* Render more columns if needed */}
+            </tr>
+          ))}
+        </tbody>
+      </table>
         </div> 
     ); 
 }; 

@@ -254,8 +254,10 @@ app.get('/api/search', async (req, res) => {
   const query = req.query.query.trim();
   const sheet = req.query.sheet.trim();
   const result = await readExcelCache(sheet);
-  res.json(result[query]);
-  console.log(result[query]);
+  const data = result[query];
+  res.json(data);
+  // res.json(result[query]);
+  console.log(data);
 });
 
 // app.get('/api/data', (req, res) => {
