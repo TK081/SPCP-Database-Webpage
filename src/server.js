@@ -258,10 +258,10 @@ app.get('/api/search', async (req, res) => {
   console.log(result[query]);
 });
 
-app.get('/api/data', (req, res) => {
+// app.get('/api/data', (req, res) => {
 
-  const data = 
-});
+//   const data = 
+// });
 
 app.listen(port, () => {
   console.log('Server is running on port 8000');

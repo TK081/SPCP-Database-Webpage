@@ -72,7 +72,7 @@ const Dropdown = ({selectedSheetChanged}) => {
  ))}
 
  </select>
- <button className ='button' onClick={handleSheetLoad}>Load Sheet</button>
+ <button className ='Loadbutton' onClick={handleSheetLoad}>Load Sheet</button>
     </div>
     {showAlert && <Alert message={alertMessage} type={alertType} />}
     </div>

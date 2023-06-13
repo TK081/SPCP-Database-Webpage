@@ -71,11 +71,8 @@ function App() {
         <p> for the needed table of data to be outputted.</p>
       </div>
 
-      {/* // Search Bar Component */}
-        <SearchBar sheet={selectedSheet}/>
-
-      {/* // Help & Download Buttons */}
-      <div>
+       {/* // Help & Download Buttons */}
+       <div>
         <button className="button" type ="submit" onClick={openPopup}><FaQuestion/></button>
         <div className="popup" ref={popupRef} id="popup">
           <img src={imagetwo} />
@@ -85,6 +82,9 @@ function App() {
         </div>
         <button className="button"><FaDownload/></button>
       </div>
+
+      {/* // Search Bar Component */}
+        <SearchBar sheet={selectedSheet}/>
 
     {/* // Data Output Component */}
       
