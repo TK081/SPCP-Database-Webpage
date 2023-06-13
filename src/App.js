@@ -1,6 +1,7 @@
 import React, { useState , useRef} from "react";
 import './App.css';
 import image from './images/spcp.jpg';
+import imagethree from './images/logo2.png';
 import imagetwo from './images/questionmark.png'
 import {FaQuestion , FaDownload, FaFacebook, FaInstagram, FaYoutube} from 'react-icons/fa';
 import SearchBar from "./SearchBar";
@@ -36,7 +37,7 @@ function App() {
   }
 
   return (
-
+    <body>
     <div className = "container">
 
       {/* // Title of Webpage */}
@@ -84,35 +85,39 @@ function App() {
         </div>
         <button className="button"><FaDownload/></button>
       </div>
+
       {/*Footer*/}
      <footer className="footer">
-        <div className="container">
          <div className="row">
               {/* Column 1 */}
-    {/* <div className="Logo">
-      <h3>LOGO</h3>
-    </div> */}
+     <div className="col">
+     <img src={imagethree} className="logoVersionTwo"/>
+    </div>
     {/* Column 2 */}
-    {/* <div classNAme="Links">
-      <h3>Useful Link</h3>
-      <a href="#">SPCP Website</a>
-      <a href="#">Portraits of Ontario</a>
-    </div> */}
+     <div className="col">
+      <h3>Useful Link <div className="underline"><span></span></div></h3>
+      <ul>
+        <li><a href="#">SPCP Website</a></li>
+        <li><a href="#">Portraits of Ontario</a></li>
+      </ul>
+    </div> 
     {/* Column 3 */}
-    {/* <div className="socials">
-      <h3>Socials</h3>
-      <a href=""><i><FaFacebook/></i></a>
-      <a href=""><i><FaInstagram/></i></a>
-      <a href=""><i><FaYoutube/></i></a>
-    </div> */}
+     <div className="col">
+     <h3>Socials<div className="underline"><span></span></div></h3>
+      <div className="social-icons">
+      <a href="#"><i><FaFacebook/></i></a>
+      <a href="#"><i><FaInstagram/></i></a>
+      <a href="#"><i><FaYoutube/></i></a>
+      </div>
+    </div> 
 
 
-          </div> 
-       
-      </div> 
+    </div>
       
       </footer>
+      
     </div>
+    </body>
   );
 }
 
