@@ -200,12 +200,15 @@ body{
 }
 
 .popup {
+  font-size: 17px;
   width: 400px;
   color: #333;
+  z-index: 2;
   position: absolute;
   top: 50%;
   left: 50%;
   text-align: center;
+  align-items: center;
   transform: translate(-50%, -50%) scale(0.1);
   background-color: #fff;
   padding: 0 30px 30px;
@@ -229,6 +232,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
 }
 
 .popup h2{
+align-items: center;
 font-size: 38px;
 font-weight: 500;
 margin: 30px 0 10px;

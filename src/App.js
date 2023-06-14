@@ -3,7 +3,7 @@ import './App.css';
 import image from './images/spcp.jpg';
 import imagethree from './images/logo2.png';
 import imagetwo from './images/questionmark.png'
-import {FaQuestion , FaDownload, FaFacebook, FaInstagram, FaYoutube} from 'react-icons/fa';
+import {FaQuestion , FaDownload, FaFacebook, FaInstagram, FaYoutube, FaTwitter} from 'react-icons/fa';
 import SearchBar from "./SearchBar";
 import Dropdown from "./Dropdown";
 // import SearchResult from "./SearchResult";
@@ -77,7 +77,11 @@ function App() {
         <div className="popup" ref={popupRef} id="popup">
           <img src={imagetwo} />
           <h2>Help</h2>
-          <p>Search in this format: "Indicator/Area"</p>
+          <p>Step 1: Select a region from the dropdown menu above</p>
+          <p>Step 2: Search in this format: "Indicator/Area"</p>
+          <p>The indicators we provide are Age group, Gender, Martial Status, Industry Of Labour Force Population In Percentage, Total Labour Force population aged 15 years and over by Industry - NAICS 2012, etc.</p>
+          <p> The area that we study were the cities in the Peel Region (Brampton, Mississauga, Caldeon) and all provinces and territories.</p>
+          <p>Example Input: Gender/Brampton</p>
           <button type="button" onClick={closePopup}>OK</button>
         </div>
         <button className="button"><FaDownload/></button>
@@ -111,6 +115,7 @@ function App() {
       <div className="social-icons">
       <a href="#"><i><FaFacebook/></i></a>
       <a href="#"><i><FaInstagram/></i></a>
+      <a href="#"><i><FaTwitter/></i></a>
       <a href="#"><i><FaYoutube/></i></a>
       </div>
     </div> 
