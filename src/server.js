@@ -22,7 +22,7 @@ app.use(cors());
 const path = require('path');
 const ExcelJS = require('exceljs');
 const chartJS = require('chart.js');
-const filePath = path.join(__dirname, 'excelfiles', 'praythisworksv21.xlsx');
+const filePath = path.join(__dirname, 'excelfiles', 'masterfile.xlsx');
 const cache = {excel: {}, suggestions: {}};
 
 // Check over for later
@@ -31,20 +31,30 @@ const cache = {excel: {}, suggestions: {}};
 // http://localhost:8000/api/sheet/Peel%20Region%20Statistics
 
 app.get('/api/sheetNames', async (req, res) => {
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.readFile(filePath);
-  const sheetNames = workbook.worksheets.map(sheet => decodeURIComponent(sheet.name));
-  res.json({ sheetNames });
+  try {
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.readFile(filePath);
+    const sheetNames = workbook.worksheets.map(sheet => decodeURIComponent(sheet.name));
+    res.json({ sheetNames });
+  } catch(error) {
+    res.sendStatus(500);
+    console.log(error);
+  }
 });
 
 app.get('/api/sheet/:sheetName', async (req, res) => {
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.readFile(filePath);
-  const sheetName = decodeURIComponent(req.params.sheetName);
-  const sheet = workbook.getWorksheet(sheetName);
-  // console.log('Sheet Object:', sheet);
-  const jsonData = sheet.getSheetValues();
-  res.json({ sheetData: jsonData });
+  try {
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.readFile(filePath);
+    const sheetName = decodeURIComponent(req.params.sheetName);
+    const sheet = workbook.getWorksheet(sheetName);
+    // console.log('Sheet Object:', sheet);
+    const jsonData = sheet.getSheetValues();
+    res.json({ sheetData: jsonData });
+  } catch(error) {
+    res.sendStatus(500);
+    console.log(error);
+  }
 });
 
 /**
@@ -118,9 +128,10 @@ const getIndicatorAreaCrossSection = (worksheet, indicatorName, indicatorLocatio
     let categoryCell = worksheet.getCell(`${indicatorLocation.col}${row}`);
     let areaValueCell = worksheet.getCell(`${areaLocation.col}${row}`);
     categories.push(`${categoryCell.value}`.trim());
-    let areaValue = `${areaValueCell.toString()}`.trim();
-    if (areaValue.length == 0) {
-      areaValue = '0';
+    let areaValue = parseFloat(`${areaValueCell.toString()}`.trim());
+    console.log(`${areaValue} || ${areaValueCell.toString()}`)
+    if (areaValueCell.numFmt && areaValueCell.numFmt.endsWith('%')) {
+      areaValue = `${areaValue * 100}%`;
     }
     areasValues.push(areaValue);
   }
@@ -138,10 +149,9 @@ const readExcel = async (excelSheet) => {
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
   const worksheet = workbook.getWorksheet(excelSheet); // Replace with the name of your sheet
-  // console.log(worksheet);
 
   let indicators = getIndicators(worksheet);
-  // console.log(indicators);
+  
   const result = {};
   Object.keys(indicators).forEach((indicatorName) => {
     let indicator = indicators[indicatorName];
@@ -151,10 +161,6 @@ const readExcel = async (excelSheet) => {
       result[`${indicatorName}/${areaName}`] = crossSection;
     });
   });
-
-  // Testing Case
-    // let searchString = 'Gender/Ontario';
-    // console.log(result[searchString]); 
 
   return result;
 
@@ -239,30 +245,39 @@ const loadSuggestionData = async (excelSheet) => {
 }
 
 app.get('/autocomplete', async (req, res) => {
-  const term = req.query.term; // Takes whatever term is being typed
-  const sheet = req.query.sheet;
+  try{
 
-  let newSuggestionData = await readSuggestionCache(sheet);
+    const term = req.query.term; // Takes whatever term is being typed
+    const sheet = req.query.sheet;
+  
+    let newSuggestionData = await readSuggestionCache(sheet);
+  
+    // filters through the array and matches with term
+    const filteredSuggestions = newSuggestionData.filter((text) =>
+    text.toLowerCase().includes(term.toLowerCase()));
+    res.json(filteredSuggestions);
 
-  // filters through the array and matches with term
-  const filteredSuggestions = newSuggestionData.filter((text) =>
-  text.toLowerCase().includes(term.toLowerCase()));
-  res.json(filteredSuggestions);
+  } catch(error){
+    res.sendStatus(500);
+    console.log(error);
+  }
 });
 
 app.get('/api/search', async (req, res) => {
-  const query = req.query.query.trim();
-  const sheet = req.query.sheet.trim();
-  const result = await readExcelCache(sheet);
-  const data = result[query];
-  res.json(data);
-  // res.json(result[query]);
-  console.log(data);
-});
+  try{
+    const query = req.query.query.trim();
+    const sheet = req.query.sheet.trim();
+    const result = await readExcelCache(sheet);
+    const data = result[query];
+    res.json(data);
+    // res.json(result[query]);
+    console.log(data);
+  } catch(error){
+    res.sendStatus(500);
+    console.log(error);
+  }
 
-// app.get('/api/data', (req, res) => {
-//   const data = 
-// });
+});
 
 app.listen(port, () => {
   console.log('Server is running on port 8000');

@@ -8,6 +8,7 @@ import SearchBar from "./SearchBar";
 import Dropdown from "./Dropdown";
 // import SearchResult from "./SearchResult";
 import 'typeface-montserrat';
+import SearchOutput from "./SearchOutput";
 //pray this works
 
 /* 
@@ -24,7 +25,7 @@ function App() {
   // All HTML elements and components as they appear
 
   const [selectedSheet, setSelectedSheet] = useState('');
-
+  const [currentQuery, setCurrentQuery] = useState('');
 
   const popupRef = useRef(null);
 
@@ -88,11 +89,8 @@ function App() {
       </div>
 
       {/* // Search Bar Component */}
-        <SearchBar sheet={selectedSheet}/>
-
-    {/* // Data Output Component */}
-      
-
+        <SearchBar sheet={selectedSheet} onSearchRequested={setCurrentQuery}/>
+        <SearchOutput sheet={selectedSheet} query={currentQuery}/>
 
       {/*Footer*/}
      <footer className="footer">
@@ -117,14 +115,10 @@ function App() {
       <a href="#"><i><FaInstagram/></i></a>
       <a href="#"><i><FaTwitter/></i></a>
       <a href="#"><i><FaYoutube/></i></a>
-      </div>
-    </div> 
-
-
+        </div>
+      </div> 
     </div>
-      
-      </footer>
-      
+    </footer>
     </div>
     </body>
   );
