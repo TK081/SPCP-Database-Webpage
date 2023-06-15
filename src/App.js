@@ -1,4 +1,4 @@
-import React, { useState , useRef} from "react";
+import React, { useState , useRef , useEffect} from "react";
 import './App.css';
 import image from './images/spcp.jpg';
 import imagethree from './images/logo2.png';
@@ -36,6 +36,30 @@ function App() {
   function closePopup(){
     popupRef.current.classList.remove("open-popup")
   }
+
+  const footerRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const windowHeight = window.innerHeight;
+      const bodyHeight = document.body.offsetHeight;
+      const isContentLargerThanWindow = bodyHeight > windowHeight;
+
+      if (!isContentLargerThanWindow) {
+        const remainingHeight = windowHeight - bodyHeight;
+        footerRef.current.style.marginTop = `${remainingHeight}px`;
+      } else {
+        footerRef.current.style.marginTop = "0";
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <body>
@@ -93,7 +117,7 @@ function App() {
         <SearchOutput sheet={selectedSheet} query={currentQuery}/>
 
       {/*Footer*/}
-     <footer className="footer">
+     <footer ref={footerRef} className="footer">
          <div className="row">
               {/* Column 1 */}
      <div className="col">
