@@ -116,13 +116,13 @@ const SearchOutput = ({query, sheet}) => {
       };
 
       return (
-      <div>
+      <div className='render'>
 
         <div class="table">
           {renderTable()}
         </div>
 
-        <div>
+        <div class="graph">
           {renderBarChart()}
         </div>
           

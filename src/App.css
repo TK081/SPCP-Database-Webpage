@@ -306,7 +306,17 @@ font-family: 'Montserrat', sans-serif;
   background: #5e5f45;
 }
 
+.render{
+  align-items: center;
+}
+
+.graph{
+  margin-top: -200px;
+  margin-bottom: 250px;
+  margin-left: -35px;
+}
 .table{
+  margin-top: 63px;
   margin-bottom: 300px;
 }
 
