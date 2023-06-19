@@ -159,6 +159,10 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
+.Loadbutton:hover {
+  background-color: #007663;
+}
+
 .button {
   background-color: #00C9B0;
   border: none;
