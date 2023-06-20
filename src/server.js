@@ -37,7 +37,7 @@ app.get('/api/sheetNames', async (req, res) => {
     const sheetNames = workbook.worksheets.map(sheet => decodeURIComponent(sheet.name));
     res.json({ sheetNames });
   } catch(error) {
-    res.sendStatus(500);
+    res.sendStatus(500).json({error: 'Could not retrive sheet name from excel file. Please ensure that the correct excel file is being used.'} );;
     console.log(error);
   }
 });
@@ -52,7 +52,7 @@ app.get('/api/sheet/:sheetName', async (req, res) => {
     const jsonData = sheet.getSheetValues();
     res.json({ sheetData: jsonData });
   } catch(error) {
-    res.sendStatus(500);
+    res.sendStatus(500).json({error: 'Could not retrive sheet data from sheet. Please ensure that the correct excel file is being used.'} );
     console.log(error);
   }
 });
@@ -258,7 +258,7 @@ app.get('/autocomplete', async (req, res) => {
     res.json(filteredSuggestions);
 
   } catch(error){
-    res.sendStatus(500);
+    res.sendStatus(500).json({error: 'Could not retrive suggestions. Please ensure that the correct excel file is being used.'} );
     console.log(error);
   }
 });
@@ -273,7 +273,7 @@ app.get('/api/search', async (req, res) => {
     // res.json(result[query]);
     console.log(data);
   } catch(error){
-    res.sendStatus(500);
+    res.sendStatus(500).json({error: 'Could not retrive search query'} );
     console.log(error);
   }
 
