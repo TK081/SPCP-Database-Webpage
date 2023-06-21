@@ -9,13 +9,6 @@ Chart.register(...registerables);
 const SearchOutput = ({query, sheet}) => {
 
     const [data, setData] = useState([]);
-    // const chartRef = useRef(null);
-
-    // Chart.register(
-    //   CategoryScale,
-    //   LinearScale,
-    //   BarElement
-    // )
     
     useEffect(() => {
         console.log(query);
