@@ -10,7 +10,6 @@ const Dropdown = ({selectedSheetChanged}) => {
 
   const handleSheetSelect = (event) => {
     setSelectedSheet(event.target.value);
-    selectedSheetChanged(event.target.value);
   };
 
   const Alert = ({ message ,type}) => {
@@ -39,6 +38,7 @@ const Dropdown = ({selectedSheetChanged}) => {
       })
         .then((response) => {
           // Handle the response with the selected sheet data in the backend
+          selectedSheetChanged(selectedSheet);
           setShowAlert(true);
           setAlertMessage(`${selectedSheet} Loaded successfully!`);
           setAlertType('success');
