@@ -72,7 +72,6 @@ const SearchOutput = ({query, sheet}) => {
           labels: categories,
           datasets: [
             {
-              label: `${indicator}/${area}`,
               data: areasValues.map((value) => {
                 if (typeof value === 'string') {
                   return parseFloat(value.replace('%', ''));
@@ -84,13 +83,14 @@ const SearchOutput = ({query, sheet}) => {
             },
           ],
         };
-      
+        
 
         if (isPercentage) {
       
           const options = {
             maintainAspectRatio: true,
             plugins: {
+              
               title: {
                 display: true,
                 text: `${indicator}/${area}`,
@@ -100,13 +100,23 @@ const SearchOutput = ({query, sheet}) => {
                   bottom: 10,
                 },
               },
+              legend: {
+                display: true,
+                labels: {
+                  padding: 10,
+                  boxWidth: 12, // Adjust the width of the legend items
+                  font: {
+                    size: 10, // Adjust the font size of the legend items
+                  },
+                },
+              },
             },
             responsive: true,
           };
       
           return (
             <div>
-              <div style={{ maxWidth: '500px', margin: '0 auto' }}>
+              <div style={{ minWidth: '500px', margin: '0 auto' , height: '500px'}}>
                 <Pie data={chartData} options={options} />
               </div>
             </div>
@@ -129,14 +139,52 @@ const SearchOutput = ({query, sheet}) => {
                   bottom: 10,
                 },
               },
+              legend: {
+                display: true,
+                labels: {
+                  generateLabels: (chart) => {
+                    const { data } = chart;
+                    if (data.labels.length && data.datasets.length) {
+                      return data.labels.map((label, i) => ({
+                        text: label,
+                        fillStyle: data.datasets[0].backgroundColor[i],
+                        hidden: isNaN(data.datasets[0].data[i]) || data.datasets[0].data[i] === 0,
+                        index: i,
+                      }));
+                    }
+                    return [];
+                  },
+                },
+                onClick: (e, legendItem, legend) => {
+                  const chart = legend.chart;
+                  if (chart) {
+                    const datasetIndex = legendItem.datasetIndex;
+                    const meta = chart.getDatasetMeta(datasetIndex);
+                    if (meta) {
+                      meta.hidden = meta.hidden === null ? !meta.hidden : null;
+                      chart.update();
+                    }
+                  }
+                },
+              },
             },
+
             scales: {
               x: {
                 display: false,  // Set display to false to hide the x-axis labels
               },
               y: {
                 beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Number of Residents',
+                  font: {
+                    size: 14,
+                    weight: 'bold',
+                  },
+                },
               },
+
             },
             responsive: true,
             interaction: {
@@ -148,7 +196,7 @@ const SearchOutput = ({query, sheet}) => {
           const chartContainerStyle = {
             width: '100%',
             minWidth: '950px',
-            maxWidth: '1500px', // Adjust the maximum width based on your preference
+            height: '500px',
             margin: '0 auto', // Center the chart horizontally
           };
   
