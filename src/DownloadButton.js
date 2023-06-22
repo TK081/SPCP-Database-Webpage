@@ -30,7 +30,7 @@ const DownloadButton = () => {
     return (
         <div>
           {/* Place the target element you want to capture */}
-          <div className="render">
+          <div>
             {/* Content you want to capture */}
           </div>
     

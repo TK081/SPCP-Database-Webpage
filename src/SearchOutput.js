@@ -226,7 +226,7 @@ const SearchOutput = ({query, sheet}) => {
       };
 
       return (
-      <div className='render'>
+      <div id='render'>
 
         <div class="table">
           {renderTable()}
