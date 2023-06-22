@@ -1,14 +1,15 @@
-import React, { useState , useRef , useEffect} from "react";
+import React, {useState , useRef , useEffect} from "react";
 import './App.css';
 import image from './images/spcp.jpg';
-import imagethree from './images/logo2.png';
-import imagetwo from './images/questionmark.png'
-import {FaQuestion , FaDownload, FaFacebook, FaInstagram, FaYoutube, FaTwitter} from 'react-icons/fa';
+import imagethree from "./images/logo2.png";
+import imagetwo from "./images/questionmark.png"
+import {FaQuestion, FaFacebook, FaInstagram, FaYoutube, FaTwitter} from 'react-icons/fa';
 import SearchBar from "./SearchBar";
 import Dropdown from "./Dropdown";
-// import SearchResult from "./SearchResult";
 import 'typeface-montserrat';
 import SearchOutput from "./SearchOutput";
+import Download from "./DownloadButton";
+import DownloadButton from "./DownloadButton";
 //pray this works
 
 /* 
@@ -109,7 +110,10 @@ function App() {
           <p>Example Input: Gender/Brampton</p>
           <button type="button" onClick={closePopup}>OK</button>
         </div>
-        <button className="button"><FaDownload/></button>
+        <div>
+        <DownloadButton/>
+        </div>
+        {/* <button className="button"><FaDownload/></button> */}
       </div>
 
       {/* // Search Bar Component */}
