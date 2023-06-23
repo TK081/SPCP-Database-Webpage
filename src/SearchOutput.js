@@ -31,6 +31,7 @@ const SearchOutput = ({query, sheet}) => {
 
     const { indicator, area, categories, areasValues } = data;
 
+// Uses data the user wants from the excel sheet and renders it in Table
     const renderTable = () => {
         if (Object.keys(data).length === 0) {
           return;
@@ -56,11 +57,13 @@ const SearchOutput = ({query, sheet}) => {
         );
       };
 
+      // Uses data the user wants from the excel sheet and renders it in Graph
       const renderChart = () => {
         if (Object.keys(data).length === 0 || !areasValues || areasValues.length === 0) {
           return null;
         }
 
+        // check if areaValues is a percent value or not
         const isPercentage = areasValues.every((value) => {
           if (typeof value !== 'string') {
             return false; // Not a string, not a percentage
@@ -84,7 +87,7 @@ const SearchOutput = ({query, sheet}) => {
           ],
         };
         
-
+        // if areaValues is a percent value it provides a pie chart
         if (isPercentage) {
       
           const options = {
@@ -125,6 +128,7 @@ const SearchOutput = ({query, sheet}) => {
 
         }
 
+        // if areaValues is not a percent value it provides a bar chart
         else{
       
           const options = {
@@ -211,6 +215,7 @@ const SearchOutput = ({query, sheet}) => {
        
       };
 
+      // generates a random colour so that each bar on a bar graph or slice  on a pie chart is different
       const generateColors = (numColors) => {
         const colors = [];
         for (let i = 0; i < numColors; i++) {
