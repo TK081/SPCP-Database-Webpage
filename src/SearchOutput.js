@@ -195,7 +195,7 @@ const SearchOutput = ({query, sheet}) => {
   
           const chartContainerStyle = {
             width: '100%',
-            minWidth: '950px',
+            minWidth: '750px',
             height: '500px',
             margin: '0 auto', // Center the chart horizontally
           };
@@ -227,15 +227,17 @@ const SearchOutput = ({query, sheet}) => {
 
       return (
       <div id='render'>
-
+        <div id = 'Table'>
         <div class="table">
           {renderTable()}
         </div>
+        </div>
 
+        <div id = 'Graph'>
         <div className="graph">
           {renderChart()}
           </div>
-          
+          </div>
       </div>
 
       );

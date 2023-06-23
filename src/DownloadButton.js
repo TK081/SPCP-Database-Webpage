@@ -23,6 +23,7 @@ const DownloadButton = () => {
         // console.log(imgHeight);
         // console.log(elemRect.height);
         // console.log(canvas.width);
+        const horizontalOffset = (pdf.internal.pageSize.getWidth() - imgWidth) / 2;
 
         // Convert the captured canvas to an image and add it to the PDF
         const screenshotData = canvas.toDataURL('image/png', 1.0);
@@ -30,7 +31,7 @@ const DownloadButton = () => {
         // console.log(screenshotData);
         pdf.deletePage(1);
         pdf.addPage(imgWidth, imgHeight);
-        pdf.addImage(screenshotData, 'PNG', 0, 0);
+        pdf.addImage(screenshotData, 'PNG',  horizontalOffset, 0);
 
         // Save the PDF and trigger the download
         pdf.save('dataoutput.pdf');

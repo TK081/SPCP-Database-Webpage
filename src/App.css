@@ -309,7 +309,6 @@ font-family: 'Montserrat', sans-serif;
 .graph{
   display: flex;
   justify-content: center;
-  align-items: center;
   margin-top: -200px;
   margin-bottom: 100px;
 }
@@ -464,4 +463,5 @@ footer{
 
 #render{
   position: relative;
-}
+  width: 700px;
+} 

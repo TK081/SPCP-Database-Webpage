@@ -100,6 +100,7 @@ function App() {
        {/* // Help & Download Buttons */}
        <div>
         <button className="button" type ="submit" onClick={openPopup}><FaQuestion/></button>
+        <DownloadButton/>
         <div className="popup" ref={popupRef} id="popup">
           <img src={imagetwo} />
           <h2>Help</h2>
@@ -109,9 +110,6 @@ function App() {
           <p> The area that we study were the cities in the Peel Region (Brampton, Mississauga, Caldeon) and all provinces and territories.</p>
           <p>Example Input: Gender/Brampton</p>
           <button type="button" onClick={closePopup}>OK</button>
-        </div>
-        <div>
-        <DownloadButton/>
         </div>
         {/* <button className="button"><FaDownload/></button> */}
       </div>
@@ -131,18 +129,17 @@ function App() {
      <div className="col">
       <h3>Useful Link <div className="underline"><span></span></div></h3>
       <ul>
-        <li><a href="#">SPCP Website</a></li>
-        <li><a href="#">Portraits of Ontario</a></li>
+        <li><a href="http://www.spcpeel.com/">SPCP Website</a></li>
+        <li><a href="http://www.portraitsofpeel.ca/index.php">Portraits of Ontario</a></li>
       </ul>
     </div> 
     {/* Column 3 */}
      <div className="col">
      <h3>Socials<div className="underline"><span></span></div></h3>
       <div className="social-icons">
-      <a href="#"><i><FaFacebook/></i></a>
-      <a href="#"><i><FaInstagram/></i></a>
-      <a href="#"><i><FaTwitter/></i></a>
-      <a href="#"><i><FaYoutube/></i></a>
+      <a href="https://www.facebook.com/profile.php?id=100069688715596"><i><FaFacebook/></i></a>
+      <a href="https://twitter.com/spcpeel1"><i><FaTwitter/></i></a>
+      <a href="https://www.youtube.com/channel/UC_cWBYmy1RvyN8xilqiYe-Q"><i><FaYoutube/></i></a>
         </div>
       </div> 
     </div>
