@@ -1,8 +1,11 @@
 import html2canvas from 'html2canvas';
+import React, { useRef } from "react";
 import jsPDF from 'jspdf';
-import {FaDownload} from 'react-icons/fa';
+import {FaDownload,FaQuestion} from 'react-icons/fa';
+import imagetwo from "./images/questionmark.png"
 
 const DownloadButton = () => {
+  
     const handleCaptureScreenshot = () => {
 
       try {
@@ -42,6 +45,16 @@ const DownloadButton = () => {
       }
     };
 
+    const popupRef = useRef(null);
+
+    function openPopup(){
+      popupRef.current.classList.add("open-popup")
+    }
+  
+    function closePopup(){
+      popupRef.current.classList.remove("open-popup")
+    }
+
     return (
         <div>
           {/* Place the target element you want to capture */}
@@ -50,7 +63,22 @@ const DownloadButton = () => {
           </div>
     
           {/* Button to trigger the screenshot and PDF generation */}
-          <button className="button" onClick={handleCaptureScreenshot}><FaDownload/></button>
+          <div className="mainbuttons">
+        <button className="button" type ="submit" onClick={openPopup}><FaQuestion/></button>
+        <button className="button" onClick={handleCaptureScreenshot}><FaDownload/></button>
+        </div>
+        <div className="popup" ref={popupRef} id="popup">
+          <img src={imagetwo} />
+          <h2>Help</h2>
+          <p>Step 1: Select a region from the dropdown menu above</p>
+          <p>Step 2: Please type in the indicator you are looking for, followed by a '/' and the area you require</p>
+          <p>Step 3: An example of a correctly formatted search request can be 'Gender/Brampton'</p>
+          <a href="https://acrobat.adobe.com/id/urn:aaid:sc:US:1da2bc6c-6219-41b6-9820-e35b294e924f">List of indicators</a>
+          <br></br>
+          <br></br>
+          <br></br>
+          <button className='okButton' type="button" onClick={closePopup}>OK</button>
+        </div>
         </div>
       );
 };

@@ -159,6 +159,22 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
+.okButton{
+  background-color: #00C9B0;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .Loadbutton:hover {
   background-color: #007663;
 }

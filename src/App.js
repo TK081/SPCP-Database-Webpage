@@ -3,7 +3,7 @@ import './App.css';
 import image from './images/spcp.jpg';
 import imagethree from "./images/logo2.png";
 import imagetwo from "./images/questionmark.png"
-import {FaQuestion, FaFacebook, FaInstagram, FaYoutube, FaTwitter} from 'react-icons/fa';
+import {FaQuestion, FaFacebook, FaYoutube, FaTwitter} from 'react-icons/fa';
 import SearchBar from "./SearchBar";
 import Dropdown from "./Dropdown";
 import 'typeface-montserrat';
@@ -71,17 +71,16 @@ function App() {
 
       {/* // Paragraph #1 */}
       <div className = "paragraph">
-        <p>Are you looking for information about South Asians within Peel, provincially, or nationally? </p>  
-        <p>Look no further! Portraits of Peel has been collecting data since 1965 and helping curious </p> 
-        <p>minds like yours use our data analysis to your advantage! Click the drop-down menu and </p>
-        <p>get the information you need :)</p>
+        <p>Are you looking for information about South Asians within the Peel Region, provincially, or nationally? You </p>  
+        <p>are in luck; we currently have data from 2016 that helps you find the insights, information, and statistics you </p> 
+        <p>need. Click the dropdown menu and choose the information you need!</p>
       </div>
 
       {/* // Paragraph #2 */}
       <div className="paragraphtwo">
         <h2>Dropdown Menu</h2>
-        <p>This dropdown menu will allow you to cycle through three different profiles, which</p>
-        <p>all contain unique data for specific areas.</p>
+        <p>The dropdown menu cycles through various datasheets that has provincial, national, and Peel-wide</p>
+        <p>that appears.</p>
       </div>
 
       {/* // Dropdown Menu Component */}
@@ -93,24 +92,13 @@ function App() {
       {/* // Paragraph #3 */}
       <div className="paragraphthree">
         <h2>Searchbar for database and search queries </h2>
-        <p>This search bar allows for the user to input unique searches, which will allow</p>
+        <p>The search bar will populate suggestions based on your input. Please select one of the following suggestions</p>
         <p> for the needed table of data to be outputted.</p>
       </div>
 
        {/* // Help & Download Buttons */}
        <div>
-        <button className="button" type ="submit" onClick={openPopup}><FaQuestion/></button>
-        <DownloadButton/>
-        <div className="popup" ref={popupRef} id="popup">
-          <img src={imagetwo} />
-          <h2>Help</h2>
-          <p>Step 1: Select a region from the dropdown menu above</p>
-          <p>Step 2: Search in this format: "Indicator/Area"</p>
-          <p>The indicators we provide are Age group, Gender, Martial Status, Industry Of Labour Force Population In Percentage, Total Labour Force population aged 15 years and over by Industry - NAICS 2012, etc.</p>
-          <p> The area that we study were the cities in the Peel Region (Brampton, Mississauga, Caldeon) and all provinces and territories.</p>
-          <p>Example Input: Gender/Brampton</p>
-          <button type="button" onClick={closePopup}>OK</button>
-        </div>
+       <DownloadButton/>
         {/* <button className="button"><FaDownload/></button> */}
       </div>
 
