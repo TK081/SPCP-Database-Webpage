@@ -12,7 +12,7 @@ const SearchBar = ({sheet, onSearchRequested}) => {
         setSearchQuery(event.target.value);
         if (value === '') {
             setSuggestions([]);
-        } else {
+        } else if (sheet){
             const response = await axios.get(`http://localhost:8000/autocomplete?term=${value}&sheet=${encodeURIComponent(sheet)}`);
             setSuggestions(response.data);
         }

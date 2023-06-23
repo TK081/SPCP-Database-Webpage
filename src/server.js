@@ -258,7 +258,7 @@ app.get('/autocomplete', async (req, res) => {
     res.json(filteredSuggestions);
 
   } catch(error){
-    res.sendStatus(500).json({error: 'Could not retrive suggestions. Please ensure that the correct excel file is being used.'} );
+    res.status(500).json({error: 'Could not retrieve suggestions. Please ensure that the correct excel file is being used.'} );
     console.log(error);
   }
 });
@@ -273,7 +273,7 @@ app.get('/api/search', async (req, res) => {
     // res.json(result[query]);
     console.log(data);
   } catch(error){
-    res.sendStatus(500).json({error: 'Could not retrive search query'} );
+    res.sendStatus(500).json({error: 'Could not retrieve search query'} );
     console.log(error);
   }
 
