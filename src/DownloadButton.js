@@ -4,7 +4,7 @@ import {FaDownload} from 'react-icons/fa';
 
 const DownloadButton = () => {
     const handleCaptureScreenshot = () => {
-      
+
       // Get the target HTML element to capture (e.g., a specific div with a ref)
       const targetElement = document.getElementById('render');
 
@@ -15,17 +15,19 @@ const DownloadButton = () => {
             const pdf = new jsPDF();
 
             // Calculate the aspect ratio to fit the screenshot in the PDF page
-            const elemRect = targetElement.getBoundingClientRect();
-            const imgWidth = 210; // Width of the PDF page (in mm)
+            const elemRect = canvas.getBoundingClientRect();
+            const imgWidth = canvas.width; // Width of the PDF page (in mm)
             const imgHeight = (elemRect.height * imgWidth) / canvas.width; // Calculate the height based on the aspect ratio
             console.log(imgHeight);
             console.log(elemRect.height);
             console.log(canvas.width);
 
             // Convert the captured canvas to an image and add it to the PDF
-            const screenshotData = canvas.toDataURL('image/png');
+            const screenshotData = canvas.toDataURL('image/png', 1.0);
             console.log(screenshotData);
-            pdf.addImage(screenshotData, 'PNG', 0, 0, imgWidth, imgHeight);
+            pdf.deletePage(1);
+            pdf.addPage(imgWidth, imgHeight);
+            pdf.addImage(screenshotData, 'PNG', 0, 0);
 
             // Save the PDF and trigger the download
             pdf.save('dataoutput.pdf');
