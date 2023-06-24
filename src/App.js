@@ -17,6 +17,7 @@ import DownloadButton from "./DownloadButton";
 *  Packages                          *
 *                                    *
 *   npm install react-icons --sav    *
+*   npm install html2canvas jspdf    *
 *   npm install typeface-montserrat  *
 *------------------------------------*
 */
