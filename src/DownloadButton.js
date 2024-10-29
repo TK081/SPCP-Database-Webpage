@@ -65,7 +65,7 @@ const DownloadButton = () => {
           {/* Button to trigger the screenshot and PDF generation */}
           <div className="mainbuttons">
         <button className="button" type ="submit" onClick={openPopup}><FaQuestion/></button>
-        <button className="button" onClick={handleCaptureScreenshot}><FaDownload/></button>
+        {/* <button className="button" onClick={handleCaptureScreenshot}><FaDownload/></button> */}
         </div>
         <div className="popup" ref={popupRef} id="popup">
           <img src={imagetwo} />
